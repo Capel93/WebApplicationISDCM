@@ -79,7 +79,7 @@ public class servletRegisterUser extends HttpServlet {
         if (password.equals(password2)) {
             User newUser = new User(name, lastName, mail, nickname, password);
             if (!newUser.Exists()) newUser.CreateUser();
-           
+            
         }
         
           try (PrintWriter out = response.getWriter()) {
