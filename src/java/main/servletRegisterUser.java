@@ -8,10 +8,12 @@ package main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -71,6 +73,9 @@ public class servletRegisterUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String strUserMsg = null;
+        HttpSession session = request.getSession();
+        
         String name = request.getParameter("name");
         String lastName = request.getParameter("lastName");
         String mail = request.getParameter("mail");
@@ -80,15 +85,26 @@ public class servletRegisterUser extends HttpServlet {
         
         if (password.equals(password2)) {
             User newUser = new User(name, lastName, mail, nickname, password);
-            if (!newUser.Exists()) newUser.CreateUser();
-            
+            ConnectionJDBC.connect();
+            int i;
+            if (!ConnectionJDBC.exists(nickname)) {
+                i = ConnectionJDBC.addUser(newUser);
+                RequestDispatcher rd = request.getRequestDispatcher("mainPage.jsp");
+                rd.forward(request, response);
+            }else {
+                RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+                try (PrintWriter out = response.getWriter()) {
+                out.println("<font color=red>Nickname already used</font>");
+                }
+                rd.include(request, response);
+            }
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/register.jsp");
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<font color=red>Password not equal</font>");
         }
         
-          try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println(name);
-          }
-        processRequest(request, response);
+        rd.include(request, response);
     }
 
     /**
