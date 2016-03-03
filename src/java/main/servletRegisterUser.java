@@ -78,27 +78,26 @@ public class servletRegisterUser extends HttpServlet {
         
         String name = request.getParameter("name");
         String lastName = request.getParameter("lastName");
-        String mail = request.getParameter("mail");
+        String email = request.getParameter("email");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String password2 = request.getParameter("password2");
         
-        if (password.equals(password2)) {
-            User newUser = new User(name, lastName, mail, nickname, password);
-            ConnectionJDBC.connect();
-            int i;
-            if (!ConnectionJDBC.exists(nickname)) {
-                i = ConnectionJDBC.addUser(newUser);
-                RequestDispatcher rd = request.getRequestDispatcher("mainPage.jsp");
-                rd.forward(request, response);
-            }else {
-                RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
-                try (PrintWriter out = response.getWriter()) {
-                out.println("<font color=red>Nickname already used</font>");
-                }
-                rd.include(request, response);
+        User newUser = new User(name, lastName, email, nickname, password);
+        ConnectionJDBC.connect();
+        int i;
+        if (!ConnectionJDBC.exists(nickname)) {
+            i = ConnectionJDBC.addUser(newUser);
+            RequestDispatcher rd = request.getRequestDispatcher("mainPage.jsp");
+            rd.forward(request, response);
+        }else {
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+            try (PrintWriter out = response.getWriter()) {
+            out.println("<font color=red>Nickname already used</font>");
             }
+            rd.include(request, response);
         }
+        
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/register.jsp");
         try (PrintWriter out = response.getWriter()) {
             out.println("<font color=red>Password not equal</font>");

@@ -10,22 +10,85 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <form action="servletRegisterUser"  method="post">
+    <body onload="init()">
+        <form id="newUserForm" action="servletRegisterUser" method="post" onsubmit="return validateForm()">
             First name:<br>
-            <input type="text" name="name" ><br>
+            <input type="text" name="name" required><br><br>
             Last name:<br>
-            <input type="text" name="lastName"><br><br>
+            <input type="text" name="lastName" required><br><br>
             Email:<br>
-            <input type="text" name="mail"><br><br>
+            <input id="email" type="text" name="email" onkeyup="checkEmail()" required><br><br>
             User Name:<br>
-            <input type="text" name="nickname"><br><br>
+            <input type="text" name="nickname" required><br><br>
             Password:<br>
-            <input type="text" name="password"><br><br>
+            <input id="pass1" type="text" name="password" required><br><br>
             Repeat Password:<br>
-            <input type="text" name="password2"><br><br>
+            <input id="pass2" type="text" name="password2" onkeyup="checkPassword()" required> <label id="labelPassword" > Password not equal</label> <br><br>
             
-            <input type="submit" value="Create new user">
+            <input type="submit" value="Create new user"  >
+            
         </form> 
+        
+        <input type="submit" value="email" onclick="validateEmail()" >
+        
+        <script>
+            var wrongEmail;
+            
+            function checkPassword() {
+                var pass1 = document.getElementById("pass1").value;
+                var pass2 = document.getElementById("pass2").value;
+                if (pass1 === pass2)  {
+                    document.getElementById("labelPassword").style.display = 'none';
+                    document.getElementById("pass2").style.backgroundColor ="white";
+                }
+                else document.getElementById("labelPassword").style.display = 'inline';
+
+            }
+            
+            function checkEmail() {
+                if(wrongEmail){
+                    var valid;
+                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    var email = document.getElementById("email").value;
+                    valid = re.test(email);
+                    if (!valid) document.getElementById("email").style.backgroundColor ="red";
+                    else {
+                        document.getElementById("email").style.backgroundColor ="white";
+                        wrongEmail = false;
+                    }
+                }
+
+            }
+            
+            function validateForm(){
+                var valid = true;
+                
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                var email = document.getElementById("email").value;
+                valid = re.test(email);
+                if (!valid) {
+                    document.getElementById("email").style.backgroundColor ="red";
+                    wrongEmail = true;
+                }
+                else document.getElementById("email").style.backgroundColor ="white";
+                
+                var pass1 = document.forms["newUserForm"]["password"].value;
+                var pass2 = document.forms["newUserForm"]["password2"].value;
+                if (pass1 !== pass2){
+                    document.getElementById("pass2").style.backgroundColor ="red";
+                    //alert("bitch, passwords ain't equal");
+                    valid = false;
+                }
+                  
+                return valid;
+            }
+            
+                      
+            function init(){
+                document.getElementById("labelPassword").style.display = 'none';
+                wrongEmail=false;
+            }
+        </script>
+        
     </body>
 </html>
