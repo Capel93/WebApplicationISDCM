@@ -34,6 +34,10 @@
         <url-pattern>/servletRegisterUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>servletLoginUser</servlet-name>
+        <url-pattern>/servletLoginUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>servletMainPage</servlet-name>
         <url-pattern>/servletMainPage</url-pattern>
     </servlet-mapping>
