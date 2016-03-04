@@ -8,31 +8,57 @@ and open the template in the editor.
     <head>
         <title>New User</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
+    
     <body onload="init()">
-        <form id="newUserForm" action="servletRegisterUser" method="post" onsubmit="return validateForm()">
-            First name:<br>
-            <input type="text" name="name" required><br><br>
-            Last name:<br>
-            <input type="text" name="lastName" required><br><br>
-            Email:<br>
-            <input id="email" type="text" name="email" onkeyup="checkEmail()" required><br><br>
-            User Name:<br>
-            <input type="text" name="nickname" required><br><br>
-            Password:<br>
-            <input id="pass1" type="text" name="password" required><br><br>
-            Repeat Password:<br>
-            <input id="pass2" type="text" name="password2" onkeyup="checkPassword()" required> <label id="labelPassword" > Password not equal</label> <br><br>
+        <div class="container">
+        <h2>Register Form</h2>
+        <form role="form" id="newUserForm" action="servletRegisterUser" method="post" onsubmit="return validateForm()">
+            <div class="form-group" style="height: 50px">
+                <label for="name">First name:</label>
+                <input type="text" class="form-control" name="name" id="name" style="width:300px" required><br><br>
+            </div>
             
-            <input type="submit" value="Create new user"  >
+            <div class="form-group" style="height: 50px">
+                <label for="lastName"> Last name:</label>
+                <input type="text" class="form-control" name="lastName" id="lastName" style="width:300px" required><br><br>
+            </div>
+            
+            <div class="form-group" style="height: 50px">
+                <label for="email"> Email:</label>
+                <input type="email" class="form-control" id="email" name="email" onkeyup="checkEmail()" style="width:300px" required><br><br>
+            </div>
+            
+            <div class="form-group" style="height: 50px">
+                <label for="nickname">User Name:</label>
+                <input type="text" class="form-control" name="nickname" id="nickname" style="width:300px" required><br><br>
+            </div>
+            
+            <div class="form-group" style="height: 50px">
+                <label for="pass1">Password:</label>
+                <input id="pass1" type="password" class="form-control" name="password" style="width:300px" required><br><br>
+            </div>
+            
+            <div class="form-group" style="height: 100px">
+                <label for="pass2">Repeat Password:</label>
+                <input id="pass2" type="password" class="form-control" name="password2" onkeyup="checkPassword()" style="width:300px" required> 
+                <br>
+                <div id="labelPassword" class="alert alert-warning">
+                    <strong>Warning!</strong> Passwords are not equal!
+                </div>
+            </div>
+            
+            <input type="submit" class="btn btn-primary" value="Create new user"  >
             
         </form> 
         
-        <input type="submit" value="email" onclick="validateEmail()" >
-        
+        </div>
         <script>
-            var wrongEmail;
+            var wrongEmail=true;
             
             function checkPassword() {
                 var pass1 = document.getElementById("pass1").value;

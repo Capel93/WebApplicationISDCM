@@ -88,22 +88,14 @@ public class servletRegisterUser extends HttpServlet {
         int i;
         if (!ConnectionJDBC.exists(nickname)) {
             i = ConnectionJDBC.addUser(newUser);
-            RequestDispatcher rd = request.getRequestDispatcher("mainPage.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/register-Result.jsp");
             rd.forward(request, response);
         }else {
-            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
-            try (PrintWriter out = response.getWriter()) {
-            out.println("<font color=red>Nickname already used</font>");
-            }
-            rd.include(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/register-Error.jsp");
+            rd.forward(request, response);
         }
         
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/register.jsp");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<font color=red>Password not equal</font>");
-        }
-        
-        rd.include(request, response);
+          
     }
 
     /**

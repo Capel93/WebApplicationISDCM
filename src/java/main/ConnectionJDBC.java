@@ -53,21 +53,25 @@ public class ConnectionJDBC {
     
     
     public static boolean exists(String nickName){
+        boolean exists = false;
         try {
             Statement statement;
             ResultSet rs;
             statement = connection.createStatement();
             statement.setQueryTimeout(30);
-            rs = statement.executeQuery("SELECT nickname FROM users WHERE nickname='"+nickName+"'");
-            if(rs.next()){
-                return true;
+            rs = statement.executeQuery("SELECT NICKNAME,NAME FROM users WHERE nickname='"+nickName+"'");
+            while(rs.next()){
+                if(rs.getString("NICKNAME").equals(nickName)){
+                    exists = true;
+                }
+                
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return false;
+        return exists;
     }
     
     public static int addUser(User user){
