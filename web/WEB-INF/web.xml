@@ -13,15 +13,15 @@
     </listener>
     <servlet>
         <servlet-name>servletRegisterUser</servlet-name>
-        <servlet-class>main.servletRegisterUser</servlet-class>
+        <servlet-class>Controller.servletRegisterUser</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>servletLoginUser</servlet-name>
-        <servlet-class>main.servletLoginUser</servlet-class>
+        <servlet-class>Controller.servletLoginUser</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>servletMainPage</servlet-name>
-        <servlet-class>main.servletMainPage</servlet-class>
+        <servlet-class>Controller.servletMainPage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>dispatcher</servlet-name>
@@ -33,7 +33,6 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>servletRegisterUser</servlet-name>
         <url-pattern>/servletRegisterUser</url-pattern>

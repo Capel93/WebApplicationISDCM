@@ -1,4 +1,4 @@
-package main;
+package Controller;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,6 +6,7 @@ package main;
  * and open the template in the editor.
  */
 
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;

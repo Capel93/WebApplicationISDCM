@@ -1,4 +1,4 @@
-package main;
+package Model;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,7 +18,7 @@ public class User {
     private String password;
 
     
-    User (String name, String lastName, String email, String nickname, String password){
+    public User (String name, String lastName, String email, String nickname, String password){
         this.name = name;
         this.lastName = lastName;
         this.email = email; 
