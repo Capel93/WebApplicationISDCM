@@ -16,6 +16,10 @@
         <servlet-class>main.servletRegisterUser</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>servletLoginUser</servlet-name>
+        <servlet-class>main.servletLoginUser</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>servletMainPage</servlet-name>
         <servlet-class>main.servletMainPage</servlet-class>
     </servlet>
@@ -29,13 +33,10 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>servletRegisterUser</servlet-name>
         <url-pattern>/servletRegisterUser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>servletLoginUser</servlet-name>
-        <url-pattern>/servletLoginUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>servletMainPage</servlet-name>
@@ -49,12 +50,16 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletLoginUser</servlet-name>
+        <url-pattern>/servletLoginUser</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

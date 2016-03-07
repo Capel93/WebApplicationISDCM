@@ -17,7 +17,7 @@
     </head>
     <body>
         <h1>NickName already used</h1>
-        <form action="index.html">
+        <form action="servletRegisterUser" method="get">
             <button class="btn btn-primary" type="submit">Go to register</button>
         </form>
     </body>

@@ -19,7 +19,7 @@
         <% String nickname =  request.getParameter("nickname");
 	%>
         <h1>Hello <%= nickname %></h1>
-        <form action="/servletLoginUser">
+        <form action="servletLoginUser" method="get">
             <button class="btn btn-primary" type="submit">Go to Login</button>
         </form>
     </body>
