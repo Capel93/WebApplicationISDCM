@@ -1,3 +1,11 @@
+<%-- 
+    Document   : index
+    Created on : 07-mar-2016, 18:53:04
+    Author     : JoanMarc
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +34,7 @@
 
 </head>
 
-<body>
+
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -47,16 +55,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="/">Home</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="servletLoginUser" method="get" >Log In</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="servletRegisterUser" method="get">Register</a>
                     </li>
                     <li>
-                        <a href="#"><%= nickname %></a>
+                        <a href="#">Profile</a>
                     </li>
                     <li>
                         <a href="#">Log Out</a>
@@ -67,15 +75,28 @@
         </div>
         <!-- /.container -->
     </nav>
+    <div class="container">
+        <%
+            if(request.getParameter("mylink")!=null)
+            { 
+              String mylink = request.getParameter("mylink");
+           %>    
 
+           <jsp:include page="<%="jsp/"+mylink+".jsp"%>"/>
+
+           <% 
+            }
+        %>
+    </div>
     
-
+    <br>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-</body>
+
 
 </html>
+

@@ -33,8 +33,9 @@ public class servletRegisterUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/register.jsp");
-        rd.forward(request, response);
+        //RequestDispatcher rd = request.getRequestDispatcher("jsp/register.jsp");
+        response.sendRedirect("index.jsp?mylink=min-register");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,8 +50,10 @@ public class servletRegisterUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/register.jsp");
-        rd.forward(request, response);
+        //RequestDispatcher rd = request.getRequestDispatcher("jsp/register.jsp");
+        //RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        response.sendRedirect("index.jsp?mylink=min-register");
+        //rd.forward(request, response);
     }
 
     /**
@@ -77,15 +80,19 @@ public class servletRegisterUser extends HttpServlet {
         User newUser = new User(name, lastName, email, nickname, password);
         ConnectionJDBC.connect();
         int i;
+        RequestDispatcher rd;
         if (!ConnectionJDBC.exists(nickname)) {
             i = ConnectionJDBC.addUser(newUser);
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/register-Result.jsp");
-            rd.forward(request, response);
+            ConnectionJDBC.disconnect();
+            response.sendRedirect("index.jsp?nikname="+nickname+";mylink=register-Result");
+            //rd = request.getRequestDispatcher("WEB-INF/jsp/register-Result.jsp");
+            
         }else {
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/register-Error.jsp");
-            rd.forward(request, response);
+            ConnectionJDBC.disconnect();
+            response.sendRedirect("index.jsp?mylink=register-Error");
+            //rd = request.getRequestDispatcher("WEB-INF/jsp/register-Error.jsp");
+            
         }
-        
           
     }
 

@@ -52,7 +52,6 @@ public class ConnectionJDBC {
         }*/
     }
     
-    
     public static boolean exists(String nickName){
         boolean exists = false;
         try {
@@ -75,6 +74,28 @@ public class ConnectionJDBC {
         return exists;
     }
     
+    public static boolean exists(String nickName, String password){
+        boolean exists = false;
+        try {
+            Statement statement;
+            ResultSet rs;
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            rs = statement.executeQuery("SELECT NICKNAME,PASSWORD FROM users WHERE nickname='"+nickName
+                    +"' and password='"+password+"'");
+            while(rs.next()){
+                if(rs.getString("NICKNAME").equals(nickName)){
+                    exists = true;
+                }
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return exists;
+    }
     public static int addUser(User user){
         try {
             Statement statement;
@@ -85,5 +106,16 @@ public class ConnectionJDBC {
             Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }
+    
+    public static void disconnect(){
+        try {
+            if(connection!=null){
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

@@ -14,17 +14,34 @@
 
 <div class="container">
   <h2>Horizontal form</h2>
-  <form class="form-horizontal" role="form">
+  <%
+    if(request.getParameter("nickname")!=null)
+    {
+        if(request.getParameter("nickname").equals("null"))
+        { 
+          
+            %>    
+
+            <div id="labelPassword" class="alert alert-warning">
+                <strong>Warning!</strong> Nickname or Password are not correct! Try again.
+            </div>
+
+            <% 
+        }
+    }
+    %>
+  
+    <form class="form-horizontal" role="form" action="servletLoginUser" method="post">
     <div class="form-group">
-      <label class="control-label col-sm-2" for="email">NickName:</label>
+      <label class="control-label col-sm-2" for="nickname">NickName:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="nickname" placeholder="Enter NickName">
+        <input type="text" class="form-control" name="nickname" id="nickname" placeholder="Enter NickName">
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Password:</label>
+      <label class="control-label col-sm-2" for="password">Password:</label>
       <div class="col-sm-10">          
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
       </div>
     </div>
     <div class="form-group">        
@@ -42,9 +59,7 @@
      
   </form>
   
-    <div class="form-group" action="servletRegisterUser" method="get">
-        <button type="submit" class="btn btn-default" >Go to Register</button>
-    </div>
+    
 </div>
 
 </body>

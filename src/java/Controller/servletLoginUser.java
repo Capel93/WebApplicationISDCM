@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,8 +31,7 @@ public class servletLoginUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
-        rd.forward(request, response);
+        response.sendRedirect("index.jsp?mylink=index");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,8 +46,7 @@ public class servletLoginUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
-        rd.forward(request, response);
+        response.sendRedirect("index.jsp?mylink=index");
     }
 
     /**
@@ -61,7 +60,26 @@ public class servletLoginUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
+        
+        ConnectionJDBC.connect();
+        int i;
+        RequestDispatcher rd;
+        if (ConnectionJDBC.exists(nickname,password)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("nickname", nickname);
+            ConnectionJDBC.disconnect();
+            response.sendRedirect("index.jsp?mylink=mainPage&nickname="+nickname);
+
+            
+        }else {
+            ConnectionJDBC.disconnect();
+            response.sendRedirect("index.jsp?mylink=index&nickname=null");
+            
+        }
+        
     }
 
     /**
