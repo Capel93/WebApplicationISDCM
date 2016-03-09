@@ -75,7 +75,6 @@ public class servletRegisterUser extends HttpServlet {
         String email = request.getParameter("email");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
-        String password2 = request.getParameter("password2");
         
         User newUser = new User(name, lastName, email, nickname, password);
         ConnectionJDBC.connect();
