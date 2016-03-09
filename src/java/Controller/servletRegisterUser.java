@@ -68,7 +68,7 @@ public class servletRegisterUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String strUserMsg = null;
-        HttpSession session = request.getSession();
+        HttpSession session;
         
         String name = request.getParameter("name");
         String lastName = request.getParameter("lastName");
@@ -81,9 +81,10 @@ public class servletRegisterUser extends HttpServlet {
         int i;
         RequestDispatcher rd;
         if (!ConnectionJDBC.exists(nickname)) {
+            session = request.getSession();
             i = ConnectionJDBC.addUser(newUser);
             ConnectionJDBC.disconnect();
-            response.sendRedirect("index.jsp?nikname="+nickname+";mylink=register-Result");
+            response.sendRedirect("index.jsp?nickname="+nickname+"&mylink=register-Result");
             //rd = request.getRequestDispatcher("WEB-INF/jsp/register-Result.jsp");
             
         }else {
