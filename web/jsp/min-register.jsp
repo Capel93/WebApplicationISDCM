@@ -24,7 +24,7 @@
             
             <div class="form-group" style="height: 50px">
                 <label for="pass1">Password:</label>
-                <input id="pass1" type="password" class="form-control" name="password" style="width:300px" required><br><br>
+                <input id="pass1" type="password" class="form-control" name="password" onkeyup="checkPassword()" style="width:300px" required><br><br>
             </div>
             
             <div class="form-group" style="height: 100px">
@@ -64,11 +64,8 @@
                     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     var email = document.getElementById("email").value;
                     valid = re.test(email);
-                    if (!valid) document.getElementById("email").style.backgroundColor ="red";
-                    else {
-                        document.getElementById("email").style.backgroundColor ="white";
-                        wrongEmail = false;
-                    }
+                    if (valid)  wrongEmail = false;
+                    
                 }
 
             }
@@ -79,17 +76,11 @@
                 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 var email = document.getElementById("email").value;
                 valid = re.test(email);
-                if (!valid) {
-                    document.getElementById("email").style.backgroundColor ="red";
-                    wrongEmail = true;
-                }
-                else document.getElementById("email").style.backgroundColor ="white";
+                if (valid)  wrongEmail = true;
                 
                 var pass1 = document.forms["newUserForm"]["password"].value;
                 var pass2 = document.forms["newUserForm"]["password2"].value;
                 if (pass1 !== pass2){
-                    document.getElementById("pass2").style.backgroundColor ="red";
-                    //alert("bitch, passwords ain't equal");
                     valid = false;
                 }
                   
