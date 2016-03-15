@@ -33,6 +33,10 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>servletListvideo</servlet-name>
+        <servlet-class>Controller.servletListvideo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servletRegisterUser</servlet-name>
         <url-pattern>/servletRegisterUser</url-pattern>
@@ -52,6 +56,10 @@
     <servlet-mapping>
         <servlet-name>servletLoginUser</servlet-name>
         <url-pattern>/servletLoginUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletListvideo</servlet-name>
+        <url-pattern>/servletListvideo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

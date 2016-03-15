@@ -5,6 +5,7 @@ package Controller;
  * and open the template in the editor.
  */
 import Model.User;
+import Model.Video;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,6 +97,7 @@ public class ConnectionJDBC {
         
         return exists;
     }
+    
     public static int addUser(User user){
         try {
             Statement statement;
@@ -105,6 +107,22 @@ public class ConnectionJDBC {
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
+    }
+    
+    public static int addVideo(Video video){
+        try {
+            Statement statement;
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            return statement.executeUpdate("insert into videos values("+video.toString()+")");
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
+    public static int existsVideo(){
         return 0;
     }
     

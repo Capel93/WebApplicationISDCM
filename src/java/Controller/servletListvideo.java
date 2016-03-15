@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import Model.User;
+import Model.Video;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author JoanMarc
  */
-public class servletLoginUser extends HttpServlet {
+public class servletListvideo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +34,19 @@ public class servletLoginUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("index.jsp?mylink=index");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet servletListvideo</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet servletListvideo at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,8 +61,19 @@ public class servletLoginUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.sendRedirect("index.jsp?mylink=index");
+        String user = null;
+        if(request.getAttribute("user") == null){
+            response.sendRedirect("index.jsp?mylink=index");
+        }else user = (String) request.getAttribute("user");
+        String userName = null;
+        String sessionID = null;
+        Cookie[] cookies = request.getCookies();
+        if(cookies !=null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("user")) userName = cookie.getValue();
+                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+            }
+        }
     }
 
     /**
@@ -62,30 +87,34 @@ public class servletLoginUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String strUserMsg = null;
+        HttpSession session;
         
-        String nickname = request.getParameter("nickname");
-        String password = request.getParameter("password");
         
+        String title = request.getParameter("title");
+        String author = request.getParameter("author");
+        String creation_date = request.getParameter("creation_date");
+        String duration = request.getParameter("duration");
+        String views = request.getParameter("views");
+        String description = request.getParameter("description");
+        String format = request.getParameter("format");
+        String url = request.getParameter("url");
+        String uploader = request.getParameter("uploader");
+        
+        Video video = new Video(title,author,creation_date,duration,Integer.parseInt(views),description,format,url,uploader);
         ConnectionJDBC.connect();
         int i;
         RequestDispatcher rd;
-        if (ConnectionJDBC.exists(nickname,password)) {
-            HttpSession session = request.getSession(true);
-            ConnectionJDBC.disconnect();
-            session.setAttribute("user", nickname);
-            session.setMaxInactiveInterval(30*60);
-            Cookie userName = new Cookie("user", nickname);
-            userName.setMaxAge(30*60);
-            response.addCookie(userName);
-            response.sendRedirect("index.jsp?mylink=mainPage&nickname="+nickname);
-
-            
-        }else {
-            ConnectionJDBC.disconnect();
-            response.sendRedirect("index.jsp?mylink=index&nickname=null");
-            
-        }
         
+        ConnectionJDBC.connect();
+        i = ConnectionJDBC.addVideo(video);
+        ConnectionJDBC.disconnect();
+        if(i<0){
+            response.sendRedirect("index.jsp?mylink=videos");
+        }else{
+            response.sendRedirect("index.jsp?mylink=error");
+        }
+                
     }
 
     /**
