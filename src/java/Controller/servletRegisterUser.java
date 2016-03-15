@@ -34,7 +34,7 @@ public class servletRegisterUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //RequestDispatcher rd = request.getRequestDispatcher("jsp/register.jsp");
-        response.sendRedirect("index.jsp?mylink=min-register");
+        response.sendRedirect("index.jsp?mylink=register");
 
     }
 
@@ -52,7 +52,7 @@ public class servletRegisterUser extends HttpServlet {
             throws ServletException, IOException {
         //RequestDispatcher rd = request.getRequestDispatcher("jsp/register.jsp");
         //RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        response.sendRedirect("index.jsp?mylink=min-register");
+        response.sendRedirect("index.jsp?mylink=register");
         //rd.forward(request, response);
     }
 
