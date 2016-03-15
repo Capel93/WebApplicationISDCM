@@ -48,7 +48,7 @@ public class servletLoginUser extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        response.sendRedirect("index.jsp?mylink=index");
+        response.sendRedirect("index.jsp?mylink=login");
     }
 
     /**
