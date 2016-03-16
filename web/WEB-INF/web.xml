@@ -37,6 +37,10 @@
         <servlet-name>servletListvideo</servlet-name>
         <servlet-class>Controller.servletListvideo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servletLogOut</servlet-name>
+        <servlet-class>Controller.servletLogOut</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servletRegisterUser</servlet-name>
         <url-pattern>/servletRegisterUser</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>servletListvideo</servlet-name>
         <url-pattern>/servletListvideo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletLogOut</servlet-name>
+        <url-pattern>/servletLogOut</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

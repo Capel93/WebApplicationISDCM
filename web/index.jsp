@@ -64,10 +64,10 @@
                         <a href="servletRegisterUser" method="get">Register</a>
                     </li>
                     <li>
-                        <a href="#">Profile</a>
+                        <a href="servletListvideo">Videos</a>
                     </li>
                     <li>
-                        <a href="#">Log Out</a>
+                        <a href="servletLogOut">Log Out</a>
                     </li>
                 </ul>
             </div>

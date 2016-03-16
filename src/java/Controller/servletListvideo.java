@@ -9,6 +9,7 @@ import Model.User;
 import Model.Video;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -61,9 +62,9 @@ public class servletListvideo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = null;
+        /*String user = null;
         if(request.getAttribute("user") == null){
-            response.sendRedirect("index.jsp?mylink=index");
+            response.sendRedirect("/servletLoginUser");
         }else user = (String) request.getAttribute("user");
         String userName = null;
         String sessionID = null;
@@ -74,6 +75,21 @@ public class servletListvideo extends HttpServlet {
                 if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
             }
         }
+        ConnectionJDBC.connect();
+        ArrayList<Video> videos = ConnectionJDBC.getVideos();
+        
+        
+        String message = "Example source code of Servlet to JSP communication.";
+        request.setAttribute("listvideos", videos);
+        */
+        ConnectionJDBC.connect();
+        ArrayList<Video> videos = ConnectionJDBC.getVideos();
+        ConnectionJDBC.disconnect();
+        request.setAttribute("listvideos",videos );
+        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?mylink=videos");
+        reqDispatcher.forward(request,response);
+        
+        
     }
 
     /**

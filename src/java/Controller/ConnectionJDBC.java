@@ -7,6 +7,8 @@ package Controller;
 import Model.User;
 import Model.Video;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sun.org.mozilla.javascript.internal.Token;
@@ -122,8 +124,34 @@ public class ConnectionJDBC {
         return 0;
     }
     
-    public static int existsVideo(){
-        return 0;
+    public static ArrayList<Video> getVideos(){
+        ArrayList<Video> videos = null;
+        try {
+            Statement statement;
+            ResultSet rs;
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            rs = statement.executeQuery("SELECT * FROM videos ");
+            videos = new ArrayList();
+            while(rs.next()){
+                Video v = new Video();
+                v.setTitle(rs.getString("TITLE"));
+                v.setAuthor(rs.getString("AUTHOR"));
+                v.setCreation_date(rs.getString("CREATION_DATE"));
+                v.setDuration(rs.getString("DURATION"));
+                v.setViews(rs.getInt("VIEWS"));
+                v.setDescription(rs.getString("DESCRIPTION"));
+                v.setFormat(rs.getString("FORMAT"));
+                v.setUrl(rs.getString("URL"));
+                v.setUploader(rs.getString("UPLOADER"));
+                videos.add(v);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return videos;
     }
     
     public static void disconnect(){

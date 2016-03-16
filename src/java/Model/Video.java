@@ -21,6 +21,9 @@ public class Video {
     private String url;
     private String uploader;
 
+    public Video() {
+    }
+
     public Video(String title, String author, String creation_date, String duration, int views, String description, String format, String url, String uploader) {
         this.title = title;
         this.author = author;
