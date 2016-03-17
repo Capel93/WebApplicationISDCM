@@ -57,28 +57,32 @@
                     <li>
                         <a href="/WebApplicationISDCM">Home</a>
                     </li>
-                    <li><%
-                            if(session.getAttribute("user") !=null)
-                            { 
-                              String user = session.getAttribute("user").toString();
-                           %>    
-                                <a href="#" method="get" ><%=user%></a>
-
-                           <% 
-                            }else{%>
-                                <a href="servletLoginUser" method="get" >Log In</a>
-                            <%}
-                        %>
-                    </li>
+                    
                     <li>
                         <a href="servletRegisterUser" method="get">Register</a>
                     </li>
                     <li>
-                        <a href="servletListvideo">Videos</a>
+                        <a href="servletListvideo" method="get">Videos</a>
                     </li>
-                    <li>
-                        <a onclick="logOut()">Log Out</a>
-                    </li>
+                    <%
+                            if(session.getAttribute("user") !=null)
+                            { 
+                              String user = session.getAttribute("user").toString();
+                           %>   <li>    
+                                    <a href="#" method="get"><%=user%></a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="logOut()">Log Out</a>
+                                </li>
+                           <% 
+                            }else{%>
+                                <li>
+                                    <a href="servletLoginUser" method="get" >Log In</a>
+                                </li>
+                            <%}
+                        %>
+                    
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -116,7 +120,7 @@
     <script>
     function logOut() {
         var x;
-        if (confirm("Press a button!") === true) {
+        if (confirm("Are you sure to LogOut?") === true) {
             window.location="servletLogOut";
         } 
     }

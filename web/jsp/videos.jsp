@@ -38,7 +38,7 @@
                   i++;
         %>  
             <tr>
-                <td><%=i%></td>
+                <td><%=v.getId()%></td>
                 <td><%=v.getTitle()%></td>		
                 <td><%=v.getAuthor()%></td>
                 <td><%=v.getCreation_date()%></td>
@@ -66,10 +66,14 @@
                 var cancel = document.getElementById("cancel");
                 save.style.display='inline-block';
                 cancel.style.display='inline-block';
-                var rowCount = table.rows.length;
+                <%
+                ArrayList<Video> listvideos = (ArrayList<Video>)request.getAttribute("listvideos");
+                int lastID = listvideos.get(listvideos.size()-1).getId()+1;
+                %>
+                var rowCount = 7;
                 var row = table.insertRow(rowCount);
 
-                row.insertCell(0).innerHTML= '<input type="number" value="'+rowCount+'" id="id" name="id" style="color:LightGray">';
+                row.insertCell(0).innerHTML= '<input type="number" value="<%=lastID%>" id="id" name="id" style="color:LightGray;" disabled>';
                 row.insertCell(1).innerHTML= '<input type="text" value="Title" id="title" name="title" style="color:LightGray">';
                 row.insertCell(2).innerHTML= '<input type="text" value="Author" id="author" name="author" style="color:LightGray">';
                 row.insertCell(3).innerHTML= '<input type="date" id="creation_date" name="creation_date">';
@@ -78,7 +82,7 @@
                 row.insertCell(6).innerHTML= '<input type="text" value="Description" id="description" name="description" style="color:LightGray">';
                 row.insertCell(7).innerHTML= '<input type="text" value="Format" id="format" name="format" style="color:LightGray">';
                 row.insertCell(8).innerHTML= '<input type="url" value="www.url.com" id="url" name="url" style="color:LightGray">';
-                row.insertCell(9).innerHTML= '<input type="text" value="Uploader" id="uploader" name="uploader" style="color:LightGray">';
+                row.insertCell(9).innerHTML= '<input type="text" value="<%=session.getAttribute("user").toString()%>" id="uploader" name="uploader" style="color:LightGray">';
                 
             }
             function reset(input){

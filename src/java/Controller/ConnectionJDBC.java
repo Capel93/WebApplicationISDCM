@@ -135,6 +135,7 @@ public class ConnectionJDBC {
             videos = new ArrayList();
             while(rs.next()){
                 Video v = new Video();
+                v.setId(rs.getInt("ID"));
                 v.setTitle(rs.getString("TITLE"));
                 v.setAuthor(rs.getString("AUTHOR"));
                 v.setCreation_date(rs.getString("CREATION_DATE"));

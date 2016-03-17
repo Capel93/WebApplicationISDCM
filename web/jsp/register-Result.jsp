@@ -18,10 +18,21 @@
         <title>Hello <%= nickname %></title>
     </head>
     <body>
-        
-        <h1>Hello <%= nickname %></h1>
-        <form action="servletLoginUser" method="get">
-            <button class="btn btn-primary" type="submit">Go to Login</button>
-        </form>
+        <div class="jumbotron" onload="Redirect()">
+            <h1>Hello <%= nickname %></h1>
+            <p>You will be redirected to login page in 5 sec.</p>
+            <form action="servletLoginUser" method="get">
+                <button class="btn btn-primary" type="submit">Go to Login</button>
+            </form>
+        </div>
+        <script type="text/javascript">
+            
+            function Redirect() {
+               window.location="servletLoginUser";
+            }
+            
+            setTimeout('Redirect()', 5000);
+         
+        </script>
     </body>
 </html>

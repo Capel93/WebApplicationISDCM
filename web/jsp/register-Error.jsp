@@ -16,9 +16,21 @@
         <title>Register Error</title>
     </head>
     <body>
-        <h1>NickName already used</h1>
-        <form action="servletRegisterUser" method="get">
-            <button class="btn btn-primary" type="submit">Go to register</button>
-        </form>
+        <div class="jumbotron" onload="Redirect()">
+            <h1>NickName already used</h1>
+            <p>You will be redirected to register page in 5 sec.</p>
+            <form action="servletRegisterUser" method="get">
+                <button class="btn btn-primary" type="submit">Go to register</button>
+            </form>
+        </div>
+        <script type="text/javascript">
+         
+            function Redirect() {
+               window.location="servletRegisterUser";
+            }
+            
+            setTimeout('Redirect()', 5000);
+         
+        </script>
     </body>
 </html>

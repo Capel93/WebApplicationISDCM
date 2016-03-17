@@ -43,6 +43,14 @@ public class Video {
         return id+",'"+title+"','"+author+"','"+creation_date+"','"+duration+"',"+views+",'"+description+"','"+format+"','"+url+"','"+uploader+"'";
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     
     
     public String getTitle() {
