@@ -19,7 +19,8 @@
     %>
         <div class="jumbotron">
                 
-            <h1>Hello <%= userName %>, <%= sessionID %></h1>
+            <h1>Hello, this is our new page</h1>
+            <p> Go to register,if you have done it, go to login.</p>
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
         </div>
         

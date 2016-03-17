@@ -1,5 +1,5 @@
 
-<<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +13,7 @@
 <body>
 
 <div class="container">
-  <h2>Horizontal form</h2>
+  <h2>Login</h2>
   <%
     if(request.getParameter("nickname")!=null)
     {

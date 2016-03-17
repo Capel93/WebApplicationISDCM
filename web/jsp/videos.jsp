@@ -57,28 +57,77 @@
         %>
         </table>
         <button type="button" class="btn btn-primary" onclick="loadRegister()">Add Video</button>
-        <button type="button" class="btn btn-primary" onclick="save()">Save</button>
+        <button type="button" class="btn btn-primary" id="save" onclick="save()" style="display:none">Save</button>
+        <button type="button" class="btn btn-primary" id="cancel" onclick="cancel()" style="display:none">Cancel</button>
         <script>
             function loadRegister(){
                 var table = document.getElementById("videos_table");
+                var save = document.getElementById("save");
+                var cancel = document.getElementById("cancel");
+                save.style.display='inline-block';
+                cancel.style.display='inline-block';
                 var rowCount = table.rows.length;
                 var row = table.insertRow(rowCount);
 
-                row.insertCell(0).innerHTML= '<input type="number" id="id">';
-                row.insertCell(1).innerHTML= '<input type="text" value="Title" id="title">';
-                row.insertCell(2).innerHTML= '<input type="text" value="Author" id="author">';
-                row.insertCell(3).innerHTML= '<input type="date" id="creation_date">';
-                row.insertCell(4).innerHTML= '<input type="datetime-local" id="duration">';
-                row.insertCell(5).innerHTML= '<input type="number" value="0" id="views">';
-                row.insertCell(6).innerHTML= '<input type="text" value="Description" id="description">';
-                row.insertCell(7).innerHTML= '<input type="text" value="Format" id="format">';
-                row.insertCell(8).innerHTML= '<input type="url" value="Url" id="url">';
-                row.insertCell(9).innerHTML= '<input type="text" value="Uploader" id="uploader">';
+                row.insertCell(0).innerHTML= '<input type="number" value="'+rowCount+'" id="id" name="id" style="color:LightGray">';
+                row.insertCell(1).innerHTML= '<input type="text" value="Title" id="title" name="title" style="color:LightGray">';
+                row.insertCell(2).innerHTML= '<input type="text" value="Author" id="author" name="author" style="color:LightGray">';
+                row.insertCell(3).innerHTML= '<input type="date" id="creation_date" name="creation_date">';
+                row.insertCell(4).innerHTML= '<input type="time" id="duration" name="duration">';
+                row.insertCell(5).innerHTML= '<input type="number" value="0" id="views" name="views" style="color:LightGray">';
+                row.insertCell(6).innerHTML= '<input type="text" value="Description" id="description" name="description" style="color:LightGray">';
+                row.insertCell(7).innerHTML= '<input type="text" value="Format" id="format" name="format" style="color:LightGray">';
+                row.insertCell(8).innerHTML= '<input type="url" value="www.url.com" id="url" name="url" style="color:LightGray">';
+                row.insertCell(9).innerHTML= '<input type="text" value="Uploader" id="uploader" name="uploader" style="color:LightGray">';
                 
             }
-            function save(){
+            function reset(input){
+                var i = document.getElementById(input);
+                i.value="";
+                i.style="color:Black";
+            }
+            function cancel(){
                 var table = document.getElementById("videos_table");
-                var rowCount = table.rows.length-1;
+                var save = document.getElementById("save");
+                var cancel = document.getElementById("cancel");
+                var rowCount = table.rows.length;
+                table.deleteRow(rowCount-1);
+                save.style.display='none';
+                cancel.style.display='none';
+            }
+            function save(){
+                
+                var form = document.createElement("form");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "servletListvideo");
+
+               
+                var id = document.getElementById("id");
+                var title = document.getElementById("title");
+                var author = document.getElementById("author");
+                var creation_date = document.getElementById("creation_date");
+                var duration = document.getElementById("duration");
+                var views = document.getElementById("views");
+                var description = document.getElementById("description");
+                var format = document.getElementById("format");
+                var url = document.getElementById("url");
+                var uploader = document.getElementById("uploader");
+
+
+
+                form.appendChild(id);
+                form.appendChild(title);
+                form.appendChild(author);
+                form.appendChild(creation_date);
+                form.appendChild(duration);
+                form.appendChild(views);
+                form.appendChild(description);
+                form.appendChild(format);
+                form.appendChild(url);
+                form.appendChild(uploader);
+
+                document.body.appendChild(form);
+                form.submit();
                 
             }
         </script>

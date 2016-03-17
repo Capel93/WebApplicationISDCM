@@ -121,7 +121,7 @@ public class ConnectionJDBC {
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
+        return -1;
     }
     
     public static ArrayList<Video> getVideos(){

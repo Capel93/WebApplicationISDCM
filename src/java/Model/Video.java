@@ -11,6 +11,7 @@ package Model;
  */
 public class Video {
 
+    private int id;
     private String title;
     private String author;
     private String creation_date;
@@ -24,7 +25,8 @@ public class Video {
     public Video() {
     }
 
-    public Video(String title, String author, String creation_date, String duration, int views, String description, String format, String url, String uploader) {
+    public Video(int id, String title, String author, String creation_date, String duration, int views, String description, String format, String url, String uploader) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.creation_date = creation_date;
@@ -38,7 +40,7 @@ public class Video {
 
     @Override
     public String toString() {
-        return "'"+title+"','"+author+"','"+creation_date+"','"+duration+"','"+views+"','"+description+"','"+format+"','"+url+"','"+uploader+"'";
+        return id+",'"+title+"','"+author+"','"+creation_date+"','"+duration+"',"+views+",'"+description+"','"+format+"','"+url+"','"+uploader+"'";
     }
 
     

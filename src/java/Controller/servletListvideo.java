@@ -82,12 +82,19 @@ public class servletListvideo extends HttpServlet {
         String message = "Example source code of Servlet to JSP communication.";
         request.setAttribute("listvideos", videos);
         */
-        ConnectionJDBC.connect();
-        ArrayList<Video> videos = ConnectionJDBC.getVideos();
-        ConnectionJDBC.disconnect();
-        request.setAttribute("listvideos",videos );
-        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?mylink=videos");
-        reqDispatcher.forward(request,response);
+        HttpSession session = request.getSession();
+        
+        if(session.getAttribute("user")==null){
+            response.sendRedirect("index.jsp?mylink=login");
+        }else{
+            ConnectionJDBC.connect();
+            ArrayList<Video> videos = ConnectionJDBC.getVideos();
+            ConnectionJDBC.disconnect();
+            request.setAttribute("listvideos",videos );
+            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?mylink=videos");
+            reqDispatcher.forward(request,response);
+        }
+        
         
         
     }
@@ -106,7 +113,7 @@ public class servletListvideo extends HttpServlet {
         String strUserMsg = null;
         HttpSession session;
         
-        
+        String id = request.getParameter("id");
         String title = request.getParameter("title");
         String author = request.getParameter("author");
         String creation_date = request.getParameter("creation_date");
@@ -117,16 +124,14 @@ public class servletListvideo extends HttpServlet {
         String url = request.getParameter("url");
         String uploader = request.getParameter("uploader");
         
-        Video video = new Video(title,author,creation_date,duration,Integer.parseInt(views),description,format,url,uploader);
+        Video video = new Video(Integer.valueOf(id),title,author,creation_date,duration,Integer.valueOf(views),description,format,url,uploader);
         ConnectionJDBC.connect();
         int i;
         RequestDispatcher rd;
-        
-        ConnectionJDBC.connect();
         i = ConnectionJDBC.addVideo(video);
         ConnectionJDBC.disconnect();
-        if(i<0){
-            response.sendRedirect("index.jsp?mylink=videos");
+        if(i>=0){
+            response.sendRedirect("servletListvideo");
         }else{
             response.sendRedirect("index.jsp?mylink=error");
         }

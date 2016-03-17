@@ -57,8 +57,18 @@
                     <li>
                         <a href="/WebApplicationISDCM">Home</a>
                     </li>
-                    <li>
-                        <a href="servletLoginUser" method="get" >Log In</a>
+                    <li><%
+                            if(session.getAttribute("user") !=null)
+                            { 
+                              String user = session.getAttribute("user").toString();
+                           %>    
+                                <a href="#" method="get" ><%=user%></a>
+
+                           <% 
+                            }else{%>
+                                <a href="servletLoginUser" method="get" >Log In</a>
+                            <%}
+                        %>
                     </li>
                     <li>
                         <a href="servletRegisterUser" method="get">Register</a>
@@ -67,7 +77,7 @@
                         <a href="servletListvideo">Videos</a>
                     </li>
                     <li>
-                        <a href="servletLogOut">Log Out</a>
+                        <a onclick="logOut()">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -85,7 +95,14 @@
            <jsp:include page="<%="jsp/"+mylink+".jsp"%>"/>
 
            <% 
-            }
+            }else{%>
+                <div class="jumbotron">
+                
+                    <h1>Hello, this is our new page</h1>
+                    <p> Go to register, if you have done it, go to login.</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                </div>
+           <%}
         %>
     </div>
     
@@ -96,7 +113,14 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-
+    <script>
+    function logOut() {
+        var x;
+        if (confirm("Press a button!") === true) {
+            window.location="servletLogOut";
+        } 
+    }
+    </script>
 
 </html>
 

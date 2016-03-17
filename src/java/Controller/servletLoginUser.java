@@ -74,9 +74,9 @@ public class servletLoginUser extends HttpServlet {
             ConnectionJDBC.disconnect();
             session.setAttribute("user", nickname);
             session.setMaxInactiveInterval(30*60);
-            Cookie userName = new Cookie("user", nickname);
-            userName.setMaxAge(30*60);
-            response.addCookie(userName);
+            //Cookie userName = new Cookie("user", nickname);
+            //userName.setMaxAge(30*60);
+            //response.addCookie(userName);
             response.sendRedirect("index.jsp?mylink=mainPage&nickname="+nickname);
 
             
