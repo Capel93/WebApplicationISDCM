@@ -7,6 +7,10 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.*;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -65,11 +69,17 @@ public class servletLoginUser extends HttpServlet {
         
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
+        String passwordmd5 = password;
+        try {
+            passwordmd5 = toMD5(password);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(servletRegisterUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         ConnectionJDBC.connect();
         int i;
         RequestDispatcher rd;
-        if (ConnectionJDBC.exists(nickname,password)) {
+        if (ConnectionJDBC.exists(nickname,passwordmd5)) {
             HttpSession session = request.getSession(true);
             ConnectionJDBC.disconnect();
             session.setAttribute("user", nickname);
@@ -97,5 +107,17 @@ public class servletLoginUser extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+     private String toMD5(String original) throws NoSuchAlgorithmException{
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(original.getBytes());
+	byte[] digest = md.digest();
+	StringBuffer sb = new StringBuffer();
+	for (byte b : digest) {
+            sb.append(String.format("%02x", b & 0xff));
+	}
+
+	return sb.toString();
+    }
 
 }
