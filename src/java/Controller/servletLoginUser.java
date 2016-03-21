@@ -92,7 +92,7 @@ public class servletLoginUser extends HttpServlet {
             
         }else {
             ConnectionJDBC.disconnect();
-            response.sendRedirect("index.jsp?mylink=index&nickname=null");
+            response.sendRedirect("index.jsp?mylink=login&nickname=null");
             
         }
         
