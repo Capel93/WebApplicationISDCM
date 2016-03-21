@@ -34,23 +34,41 @@
             { 
                 
               ArrayList<Video> listvideos = (ArrayList<Video>)request.getAttribute("listvideos");
-              for(Video v: listvideos){
-        %>  
-            <tr>
-                <td><%=v.getId()%></td>
-                <td><%=v.getTitle()%></td>		
-                <td><%=v.getAuthor()%></td>
-                <td><%=v.getCreation_date()%></td>
-                <td><%=v.getDuration()%></td>
-                <td><%=v.getViews()%></td>
-                <td><%=v.getDescription()%></td>
-                <td><%=v.getFormat()%></td>
-                <td><%=v.getUrl()%></td>
-                <td><%=v.getUploader()%></td>
-            </tr>
+              int i=0;
+              if(listvideos.size()==0){%>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>		
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+              
+              <%}else{
+
+                    for(Video v: listvideos){
+                        i++;
+                    %>  
+                        <tr>
+                            <td><%=v.getId()%></td>
+                            <td><%=v.getTitle()%></td>		
+                            <td><%=v.getAuthor()%></td>
+                            <td><%=v.getCreation_date()%></td>
+                            <td><%=v.getDuration()%></td>
+                            <td><%=v.getViews()%></td>
+                            <td><%=v.getDescription()%></td>
+                            <td><%=v.getFormat()%></td>
+                            <td><%=v.getUrl()%></td>
+                            <td><%=v.getUploader()%></td>
+                        </tr>
         
         <%
-                       
+                    }       
                 }
             }
         %>
