@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : videos
     Created on : 16-mar-2016, 16:34:17
     Author     : JoanMarc
@@ -32,10 +32,9 @@
             <%
             if(request.getAttribute("listvideos")!=null)
             { 
+                
               ArrayList<Video> listvideos = (ArrayList<Video>)request.getAttribute("listvideos");
-              int i=0;
               for(Video v: listvideos){
-                  i++;
         %>  
             <tr>
                 <td><%=v.getId()%></td>
@@ -51,7 +50,7 @@
             </tr>
         
         <%
-                          
+                       
                 }
             }
         %>
@@ -67,8 +66,11 @@
                 save.style.display='inline-block';
                 cancel.style.display='inline-block';
                 <%
+                int lastID = 0;
+                if(request.getAttribute("listvideos")!=null){
                 ArrayList<Video> listvideos = (ArrayList<Video>)request.getAttribute("listvideos");
-                int lastID = listvideos.get(listvideos.size()-1).getId()+1;
+                lastID = listvideos.get(listvideos.size()-1).getId()+1;
+                }
                 %>
                 var rowCount = 7;
                 var row = table.insertRow(rowCount);

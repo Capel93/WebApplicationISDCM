@@ -90,7 +90,8 @@ public class servletListvideo extends HttpServlet {
             ConnectionJDBC.connect();
             ArrayList<Video> videos = ConnectionJDBC.getVideos();
             ConnectionJDBC.disconnect();
-            request.setAttribute("listvideos",videos );
+            if (videos.isEmpty()) request.setAttribute("listvideos",null);
+            else request.setAttribute("listvideos",videos);
             RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?mylink=videos");
             reqDispatcher.forward(request,response);
         }
