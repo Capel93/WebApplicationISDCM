@@ -125,6 +125,8 @@ public class servletListvideo extends HttpServlet {
         String url = request.getParameter("url");
         String uploader = request.getParameter("uploader");
         
+        format = format.substring(0, Math.min(format.length(), 5)); //trunca format a 5 caracters maxim, s'hauria de fer desdel form
+
         Video video = new Video(Integer.valueOf(id),title,author,creation_date,duration,Integer.valueOf(views),description,format,url,uploader);
         ConnectionJDBC.connect();
         int i;

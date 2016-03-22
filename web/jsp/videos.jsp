@@ -95,7 +95,7 @@
                 var rowCount = <%=nVideos%>+1;
                 var row = table.insertRow(rowCount);
 
-                row.insertCell(0).innerHTML= '<input type="number" value="<%=lastID%>" id="id" name="id" style="color:LightGray;" disabled>';
+                row.insertCell(0).innerHTML= '<input type="number" value="<%=lastID%>" id="id" name="id" style="color:LightGray;" readonly>'; //si no es readonly, no es pot llegir el valor al save 
                 row.insertCell(1).innerHTML= '<input type="text" value="Title" id="title" name="title" style="color:LightGray">';
                 row.insertCell(2).innerHTML= '<input type="text" value="Author" id="author" name="author" style="color:LightGray">';
                 row.insertCell(3).innerHTML= '<input type="date" id="creation_date" name="creation_date">';
