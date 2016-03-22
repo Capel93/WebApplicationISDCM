@@ -85,12 +85,14 @@
                 cancel.style.display='inline-block';
                 <%
                 int lastID = 0;
+                int nVideos = 0;
                 if(request.getAttribute("listvideos")!=null){
                 ArrayList<Video> listvideos = (ArrayList<Video>)request.getAttribute("listvideos");
                 lastID = listvideos.get(listvideos.size()-1).getId()+1;
+                nVideos = listvideos.size();
                 }
                 %>
-                var rowCount = 7;
+                var rowCount = <%=nVideos%>+1;
                 var row = table.insertRow(rowCount);
 
                 row.insertCell(0).innerHTML= '<input type="number" value="<%=lastID%>" id="id" name="id" style="color:LightGray;" disabled>';
