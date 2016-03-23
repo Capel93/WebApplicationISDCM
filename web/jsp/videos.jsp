@@ -7,15 +7,17 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.Video"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.ForEach"%>
+<jsp:include page="delete_confirm.jsp" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        
     </head>
     <body>
-        <h2>List of Videos in Database</h2>
+        <h2>List of Videos in the Database</h2>
         <table class="table table-hover" id="videos_table" onload="loadTable()">
             <tr>
                 <th>#</th>
@@ -28,13 +30,13 @@
                 <th>Format</th>
                 <th>Url</th>
                 <th>Uploader</th>
+                <th></th>
             </tr>
             <%
             if(request.getAttribute("listvideos")!=null)
             { 
                 
               ArrayList<Video> listvideos = (ArrayList<Video>)request.getAttribute("listvideos");
-              int i=0;
               if(listvideos.size()==0){%>
                 <tr>
                     <td>-</td>
@@ -52,7 +54,6 @@
               <%}else{
 
                     for(Video v: listvideos){
-                        i++;
                     %>  
                         <tr>
                             <td><%=v.getId()%></td>
@@ -63,8 +64,14 @@
                             <td><%=v.getViews()%></td>
                             <td><%=v.getDescription()%></td>
                             <td><%=v.getFormat()%></td>
-                            <td><%=v.getUrl()%></td>
+                            <td><a href="http://<%=v.getUrl()%>"><%=v.getUrl()%></a></td>
                             <td><%=v.getUploader()%></td>
+                            
+                            <td>
+                                <button class="btn btn-xs btn-danger" data-href="JavaScript:remove(<%=v.getId()%>)" data-toggle="modal" data-target="#confirm-delete">
+                                <i class="glyphicon glyphicon-trash"></i> Delete
+                                </button>
+                            </td>
                         </tr>
         
         <%
@@ -73,14 +80,36 @@
             }
         %>
         </table>
-        <button type="button" class="btn btn-primary" onclick="loadRegister()">Add Video</button>
+           
+        <button type="button" class="btn btn-primary" id="addVideo" onclick="loadRegister()">Add Video</button>
         <button type="button" class="btn btn-primary" id="save" onclick="save()" style="display:none">Save</button>
         <button type="button" class="btn btn-primary" id="cancel" onclick="cancel()" style="display:none">Cancel</button>
         <script>
+
+            function remove(delete_id){
+                var form = document.createElement("form");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "servletListvideo");
+                var action = document.createElement("input");
+                action.value="delete";
+                action.name="action";
+                
+                var element = document.createElement("input");
+                element.value=delete_id;
+                element.name="delete_id";
+                
+                form.appendChild(action);
+                form.appendChild(element);
+                document.body.appendChild(form);
+                form.submit();
+            }
+            
             function loadRegister(){
                 var table = document.getElementById("videos_table");
+                var addVideo = document.getElementById("addVideo");
                 var save = document.getElementById("save");
                 var cancel = document.getElementById("cancel");
+                addVideo.style.display='none';
                 save.style.display='inline-block';
                 cancel.style.display='inline-block';
                 <%
@@ -114,10 +143,12 @@
             }
             function cancel(){
                 var table = document.getElementById("videos_table");
+                var addVideo = document.getElementById("addVideo");
                 var save = document.getElementById("save");
                 var cancel = document.getElementById("cancel");
                 var rowCount = table.rows.length;
                 table.deleteRow(rowCount-1);
+                addVideo.style.display='inline-block';
                 save.style.display='none';
                 cancel.style.display='none';
             }
@@ -126,6 +157,10 @@
                 var form = document.createElement("form");
                 form.setAttribute("method", "post");
                 form.setAttribute("action", "servletListvideo");
+                var action = document.createElement("input");
+                action.value="post";
+                action.name="action";
+                
 
                
                 var id = document.getElementById("id");
@@ -140,7 +175,7 @@
                 var uploader = document.getElementById("uploader");
 
 
-
+                form.appendChild(action);
                 form.appendChild(id);
                 form.appendChild(title);
                 form.appendChild(author);
@@ -158,5 +193,5 @@
             }
         </script>
     </body>
-    
+   
 </html>

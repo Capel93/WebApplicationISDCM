@@ -111,6 +111,17 @@ public class servletListvideo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                //doDelete no funciona
+        String action = request.getParameter("action");
+        if(action.equals("post")) Post(request, response);
+        else if (action.equals("delete")) Delete(request, response);
+        
+                
+    }
+    
+    
+    protected void Post(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String strUserMsg = null;
         HttpSession session;
         
@@ -141,6 +152,27 @@ public class servletListvideo extends HttpServlet {
                 
     }
 
+    
+
+    protected void Delete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String strUserMsg = null;
+        HttpSession session;
+        int delete_id = Integer.parseInt(request.getParameter("delete_id"));
+        ConnectionJDBC.connect();
+        int i;
+        RequestDispatcher rd;
+        i = ConnectionJDBC.deleteVideo(delete_id);
+        ConnectionJDBC.disconnect();
+        if(i>=0){
+            response.sendRedirect("servletListvideo");
+        }else{
+            response.sendRedirect("index.jsp?mylink=error");
+        }
+                
+    }
+    
+    
     /**
      * Returns a short description of the servlet.
      *

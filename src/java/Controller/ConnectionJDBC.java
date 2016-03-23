@@ -124,6 +124,18 @@ public class ConnectionJDBC {
         return -1;
     }
     
+    public static int deleteVideo(int id){
+        try {
+            Statement statement;
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            return statement.executeUpdate("delete from videos where id="+id+"");
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+    
     public static ArrayList<Video> getVideos(){
         ArrayList<Video> videos = null;
         try {
