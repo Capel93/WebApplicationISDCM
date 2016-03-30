@@ -12,6 +12,6 @@
         <title>Profile</title>
     </head>
     <body>
-        <h1>Hello!</h1>
+        <h1>Hello <%=session.getAttribute("user")%></h1>
     </body>
     

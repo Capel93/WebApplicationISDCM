@@ -70,7 +70,7 @@
                             { 
                               String user = session.getAttribute("user").toString();
                            %>   <li>    
-                                    <a href="#" method="get"><%=user%></a>
+                                    <a href="index.jsp?mylink=profile" method="get"><%=user%></a>
                                 </li>
                                 <li>
                                     <!--<a href="#" onclick="logOut()">Log Out</a>-->
