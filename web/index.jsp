@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="jsp/logout_confirm.jsp" />
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +73,8 @@
                                     <a href="#" method="get"><%=user%></a>
                                 </li>
                                 <li>
-                                    <a href="#" onclick="logOut()">Log Out</a>
+                                    <!--<a href="#" onclick="logOut()">Log Out</a>-->
+                                    <a href="#" data-href="servletLogOut" data-toggle="modal" data-target="#confirm-logout">Logout</a><br>
                                 </li>
                            <% 
                             }else{%>
