@@ -123,18 +123,34 @@
                 %>
                 var rowCount = <%=nVideos%>+1;
                 var row = table.insertRow(rowCount);
+                var hoy = new Date(),
+                    d = hoy.getDate(),
+                    m = hoy.getMonth()+1, 
+                    y = hoy.getFullYear(),
+                    data;
 
+                if(d < 10){
+                    d = "0"+d;
+                };
+                if(m < 10){
+                    m = "0"+m;
+                };
+
+                data = y+"-"+m+"-"+d;
+                
                 row.insertCell(0).innerHTML= '<input type="number" value="<%=lastID%>" id="id" name="id" style="color:LightGray;" readonly>'; //si no es readonly, no es pot llegir el valor al save 
                 row.insertCell(1).innerHTML= '<input type="text" value="Title" id="title" name="title" style="color:LightGray">';
                 row.insertCell(2).innerHTML= '<input type="text" value="Author" id="author" name="author" style="color:LightGray">';
                 row.insertCell(3).innerHTML= '<input type="date" id="creation_date" name="creation_date">';
-                row.insertCell(4).innerHTML= '<input type="time" id="duration" name="duration">';
+                row.insertCell(4).innerHTML= '<input type="time" id="duration" name="duration" step="1" >';
                 row.insertCell(5).innerHTML= '<input type="number" value="0" id="views" name="views" style="color:LightGray">';
                 row.insertCell(6).innerHTML= '<input type="text" value="Description" id="description" name="description" style="color:LightGray">';
                 row.insertCell(7).innerHTML= '<input type="text" value="Format" id="format" name="format" style="color:LightGray">';
                 row.insertCell(8).innerHTML= '<input type="url" value="www.url.com" id="url" name="url" style="color:LightGray">';
                 row.insertCell(9).innerHTML= '<input type="text" value="<%=session.getAttribute("user").toString()%>" id="uploader" name="uploader" style="color:LightGray">';
                 
+                var date_input = document.getElementById("creation_date");
+                date_input.value = data;
             }
             function reset(input){
                 var i = document.getElementById(input);
