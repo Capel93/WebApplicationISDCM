@@ -1,5 +1,5 @@
 <%-- 
-    Document   : delete_confirm
+    Document   : logout_confirm
     Created on : 23/03/2016, 23:22:53
     Author     : Josepd
 --%>
@@ -17,31 +17,31 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirm-logout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Logout</h4>
                 </div>
             
                 <div class="modal-body">
-                    <p>You are about to delete one video, this procedure is irreversible.</p>
+                    <p>You are about to Logout.</p>
                     <p>Do you want to proceed?</p>
                     <!--<p class="debug-url"></p>-->
                 </div>
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok">Delete</a>
+                    <a class="btn btn-danger btn-ok">Logout</a>
                 </div>
             </div>
         </div>
     </div>
     
     <script>
-        $('#confirm-delete').on('show.bs.modal', function(e) {
+        $('#confirm-logout').on('show.bs.modal', function(e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             
             $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
