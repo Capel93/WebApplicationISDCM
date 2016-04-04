@@ -84,6 +84,9 @@
         <button type="button" class="btn btn-primary" id="addVideo" onclick="loadRegister()">Add Video</button>
         <button type="button" class="btn btn-primary" id="save" onclick="save()" style="display:none">Save</button>
         <button type="button" class="btn btn-primary" id="cancel" onclick="cancel()" style="display:none">Cancel</button>
+        <div id="labelText" class="alert alert-warning" style="display:none">
+            
+        </div>
         <script>
 
             function remove(delete_id){
@@ -169,6 +172,8 @@
                 addVideo.style.display='inline-block';
                 save.style.display='none';
                 cancel.style.display='none';
+                
+                document.getElementById("labelText").style.display = "none";
             }
             function save(){
                 
@@ -178,9 +183,7 @@
                 var action = document.createElement("input");
                 action.value="post";
                 action.name="action";
-                
-
-               
+    
                 var id = document.getElementById("id");
                 var title = document.getElementById("title");
                 var author = document.getElementById("author");
@@ -192,8 +195,14 @@
                 var url = document.getElementById("url");
                 var uploader = document.getElementById("uploader");
                 
-                if (duration.value === "") duration.value = "00:00:00";
-                if (creation_date.value === "") {
+                
+                if(title.value === "") alertField("Title");
+                else if(author.value === "") alertField("Author");
+                else if(description.value === "") alertField("Description");
+                else if(format.value === "") alertField("Format");
+                else if(url.value === "") alertField("Url");
+                else if (duration.value === "") duration.value = "00:00:00";
+                else if (creation_date.value === "") {
                     var hoy = new Date(),
                     d = hoy.getDate(),
                     m = hoy.getMonth()+1, 
@@ -207,25 +216,40 @@
                     creation_date.value=data;
                 }
                 
-                if (views.value === "") views.value = "0";
+                else if (views.value === "") views.value = "0";
                 
-
-                form.appendChild(action);
-                form.appendChild(id);
-                form.appendChild(title);
-                form.appendChild(author);
-                form.appendChild(creation_date);
-                form.appendChild(duration);
-                form.appendChild(views);
-                form.appendChild(description);
-                form.appendChild(format);
-                form.appendChild(url);
-                form.appendChild(uploader);
-
-                document.body.appendChild(form);
-                form.submit();
+                else{
                 
+                    form.appendChild(action);
+                    form.appendChild(id);
+                    form.appendChild(title);
+                    form.appendChild(author);
+                    form.appendChild(creation_date);
+                    form.appendChild(duration);
+                    form.appendChild(views);
+                    form.appendChild(description);
+                    form.appendChild(format);
+                    form.appendChild(url);
+                    form.appendChild(uploader);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                }
             }
+            
+            function alertField(field){
+                
+                var alert = document.getElementById("labelText");
+                
+                alert.innerHTML = '';
+                var str = document.createElement("strong");
+                var text = document.createTextNode(' Field '+field+' must not be blank');
+                str.innerHTML = 'Warning!' ;
+                alert.appendChild(str);
+                alert.appendChild(text);
+                alert.style.display = 'inline';
+            }
+            
         </script>
     </body>
    
