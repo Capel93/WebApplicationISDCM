@@ -201,25 +201,26 @@
                 else if(description.value === "") alertField("Description");
                 else if(format.value === "") alertField("Format");
                 else if(url.value === "") alertField("Url");
-                else if (duration.value === "") duration.value = "00:00:00";
-                else if (creation_date.value === "") {
-                    var hoy = new Date(),
-                    d = hoy.getDate(),
-                    m = hoy.getMonth()+1, 
-                    y = hoy.getFullYear(),
-                    data;
+                
+                else {
+                    if (duration.value === "") duration.value = "00:00:00";
+                    if (creation_date.value === "") {
+                        var hoy = new Date(),
+                        d = hoy.getDate(),
+                        m = hoy.getMonth()+1, 
+                        y = hoy.getFullYear(),
+                        data;
 
-                    if(d < 10) d = "0"+d;
-                    if(m < 10) m = "0"+m;
-                    data = y+"-"+m+"-"+d;
-                    
-                    creation_date.value=data;
-                }
+                        if(d < 10) d = "0"+d;
+                        if(m < 10) m = "0"+m;
+                        data = y+"-"+m+"-"+d;
+
+                        creation_date.value=data;
+                    }
                 
-                else if (views.value === "") views.value = "0";
+                    if (views.value === "") views.value = "0";
                 
-                else{
-                
+               
                     form.appendChild(action);
                     form.appendChild(id);
                     form.appendChild(title);
