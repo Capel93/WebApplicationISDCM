@@ -5,6 +5,7 @@
  */
 package Services;
 
+import Controller.ConnectionJDBC;
 import Model.Video;
 import java.sql.Date;
 import java.util.List;
@@ -19,21 +20,15 @@ import javax.jws.WebParam;
 @WebService(serviceName = "SearchService")
 public class SearchService {
 
-    /**
-     * This is a sample web service operation
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
-    }
 
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "searchWithVideoName")
-    public List<Video> searchWithVideoName(@WebParam(name = "name") String name) {
+    @WebMethod(operationName = "searchWithVideoTitle")
+    public List<Video> searchWithVideoName(@WebParam(name = "title") String title) {
         //TODO write your implementation code here:
-        return null;
+        ConnectionJDBC.connect();
+        return ConnectionJDBC.getVideosByTitle(title);
     }
 
     /**
@@ -42,17 +37,19 @@ public class SearchService {
     @WebMethod(operationName = "searchVideoWithAuthor")
     public List<Video> searchVideoWithAuthor(@WebParam(name = "author") String author) {
         //TODO write your implementation code here:
-        return null;
+        ConnectionJDBC.connect();
+        return ConnectionJDBC.getVideosByAuthor(author);
     }
 
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "searchVideoWithYearCreationDate")
-    public List<Video> searchVideoWithYearCreationDate(@WebParam(name = "date") Date date) {
-        //TODO write your implementation code here:
-        return null;
+    @WebMethod(operationName = "searchVideoWithCreationYear")
+    public List<Video> searchVideoWithCreationYear(@WebParam(name = "year") int year) {
+        ConnectionJDBC.connect();
+        return ConnectionJDBC.getVideosByYear(year);
     }
+
     
     
 }

@@ -69,7 +69,11 @@
                             if(session.getAttribute("user") !=null)
                             { 
                               String user = session.getAttribute("user").toString();
-                           %>   <li>    
+                           %>   
+                                <li>
+                                    <a href="servletSearch" method="get">Search</a>
+                                </li>
+                                <li>    
                                     <a href="index.jsp?mylink=profile" method="get"><%=user%></a>
                                 </li>
                                 <li>

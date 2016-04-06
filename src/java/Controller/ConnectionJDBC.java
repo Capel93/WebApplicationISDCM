@@ -166,6 +166,101 @@ public class ConnectionJDBC {
         return videos;
     }
     
+    public static ArrayList<Video> getVideosByTitle(String title){
+        ArrayList<Video> videos = null;
+        try {
+            Statement statement;
+            ResultSet rs;
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            rs = statement.executeQuery("SELECT * FROM videos WHERE title='"+title+"'");
+            videos = new ArrayList();
+            while(rs.next()){
+                Video v = new Video();
+                v.setId(rs.getInt("ID"));
+                v.setTitle(rs.getString("TITLE"));
+                v.setAuthor(rs.getString("AUTHOR"));
+                v.setCreation_date(rs.getString("CREATION_DATE"));
+                v.setDuration(rs.getString("DURATION"));
+                v.setViews(rs.getInt("VIEWS"));
+                v.setDescription(rs.getString("DESCRIPTION"));
+                v.setFormat(rs.getString("FORMAT"));
+                v.setUrl(rs.getString("URL"));
+                v.setUploader(rs.getString("UPLOADER"));
+                videos.add(v);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return videos;
+    }
+    
+    public static ArrayList<Video> getVideosByAuthor(String author){
+        ArrayList<Video> videos = null;
+        try {
+            Statement statement;
+            ResultSet rs;
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            rs = statement.executeQuery("SELECT * FROM videos WHERE author='"+author+"'");
+            videos = new ArrayList();
+            while(rs.next()){
+                Video v = new Video();
+                v.setId(rs.getInt("ID"));
+                v.setTitle(rs.getString("TITLE"));
+                v.setAuthor(rs.getString("AUTHOR"));
+                v.setCreation_date(rs.getString("CREATION_DATE"));
+                v.setDuration(rs.getString("DURATION"));
+                v.setViews(rs.getInt("VIEWS"));
+                v.setDescription(rs.getString("DESCRIPTION"));
+                v.setFormat(rs.getString("FORMAT"));
+                v.setUrl(rs.getString("URL"));
+                v.setUploader(rs.getString("UPLOADER"));
+                videos.add(v);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return videos;
+        
+    }
+    
+    public static ArrayList<Video> getVideosByYear(int year){
+        ArrayList<Video> videos = null;
+        
+        Date initDate = new Date(year-1900, 0, 1);
+        Date finalDate = new Date(year-1900, 11, 31);
+        try {
+            Statement statement;
+            ResultSet rs;
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            rs = statement.executeQuery("SELECT * FROM videos WHERE creation_date>'"+initDate.toString()+"'"
+                    + " and creation_date<'"+finalDate.toString()+"'");
+            videos = new ArrayList();
+            while(rs.next()){
+                Video v = new Video();
+                v.setId(rs.getInt("ID"));
+                v.setTitle(rs.getString("TITLE"));
+                v.setAuthor(rs.getString("AUTHOR"));
+                v.setCreation_date(rs.getString("CREATION_DATE"));
+                v.setDuration(rs.getString("DURATION"));
+                v.setViews(rs.getInt("VIEWS"));
+                v.setDescription(rs.getString("DESCRIPTION"));
+                v.setFormat(rs.getString("FORMAT"));
+                v.setUrl(rs.getString("URL"));
+                v.setUploader(rs.getString("UPLOADER"));
+                videos.add(v);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return videos;
+    }
+    
     public static void disconnect(){
         try {
             if(connection!=null){
