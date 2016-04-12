@@ -20,10 +20,6 @@
         <servlet-class>Controller.servletLoginUser</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>servletMainPage</servlet-name>
-        <servlet-class>Controller.servletMainPage</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>2</load-on-startup>
@@ -48,10 +44,6 @@
     <servlet-mapping>
         <servlet-name>servletRegisterUser</servlet-name>
         <url-pattern>/servletRegisterUser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>servletMainPage</servlet-name>
-        <url-pattern>/servletMainPage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
