@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Client.SearchVideoService_Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,12 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.WebServiceRef;
 
 /**
  *
  * @author JoanMarc
  */
 public class servletSearch extends HttpServlet {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/WebServiceSOAP/SearchVideoService.wsdl")
+    private SearchVideoService_Service service;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,6 +68,7 @@ public class servletSearch extends HttpServlet {
         if(session.getAttribute("user")==null){
             response.sendRedirect("index.jsp?mylink=login");
         }else{
+            
             RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?mylink=search");
             reqDispatcher.forward(request,response);
         }
@@ -91,5 +97,28 @@ public class servletSearch extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private java.util.List<Client.Video> searchVideoWithAuthor(java.lang.String author) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        Client.SearchVideoService port = service.getSearchVideoServicePort();
+        return port.searchVideoWithAuthor(author);
+    }
+
+    private java.util.List<Client.Video> searchVideoWithCreationYear(int year) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        Client.SearchVideoService port = service.getSearchVideoServicePort();
+        return port.searchVideoWithCreationYear(year);
+    }
+
+    private java.util.List<Client.Video> searchWithVideoTitle(java.lang.String title) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        Client.SearchVideoService port = service.getSearchVideoServicePort();
+        return port.searchWithVideoTitle(title);
+    }
+    
+    
 
 }

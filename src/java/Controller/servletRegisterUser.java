@@ -37,6 +37,7 @@ public class servletRegisterUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //RequestDispatcher rd = request.getRequestDispatcher("jsp/register.jsp");
+        
         response.sendRedirect("index.jsp?mylink=register");
 
     }

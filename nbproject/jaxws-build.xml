@@ -59,5 +59,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/Model"/>
         <delete dir="${build.generated.dir}/jax-wsCache/SearchService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-SearchService"/>
+    <target name="wsimport-client-SearchVideoService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/SearchVideoService"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/SearchVideoService" destdir="${build.generated.dir}/jax-wsCache/SearchVideoService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/SearchVideoService/wsdl/localhost_8080/WebServiceSOAP/SearchVideoService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/WebServiceSOAP/SearchVideoService?wsdl" xnocompile="true" xendorsed="true" package="Client">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/SearchVideoService/wsdl/localhost_8080/WebServiceSOAP/SearchVideoService.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/SearchVideoService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/SearchVideoService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-SearchVideoService" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/Client"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/SearchVideoService"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-SearchService, wsimport-client-SearchVideoService"/>
 </project>

@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/WebApplicationISDCM/SearchService?wsdl" uri="src/conf/xml-resources/web-service-references/SearchService/wsdl/localhost_8080/WebApplicationISDCM/SearchService.wsdl"/>
     <system systemId="http://localhost:8080/WebApplicationISDCM/SearchService?xsd=1" uri="src/conf/xml-resources/web-service-references/SearchService/wsdl/localhost_8080/WebApplicationISDCM/SearchService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebServiceSOAP/SearchVideoService?wsdl" uri="src/conf/xml-resources/web-service-references/SearchVideoService/wsdl/localhost_8080/WebServiceSOAP/SearchVideoService.wsdl"/>
+    <system systemId="http://localhost:8080/WebServiceSOAP/SearchVideoService?xsd=1" uri="src/conf/xml-resources/web-service-references/SearchVideoService/wsdl/localhost_8080/WebServiceSOAP/SearchVideoService.xsd_1.xsd"/>
 </catalog>
