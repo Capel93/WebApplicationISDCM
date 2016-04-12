@@ -5,11 +5,8 @@
  */
 package Services;
 
-import Model.Date;
 import Model.SearchService;
 import Model.SearchVideoWithAuthorResponse;
-import Model.SearchVideoWithYearCreationDateResponse;
-import Model.SearchWithVideoNameResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -46,53 +43,7 @@ public class SearchServicePort {
      * @param date resource URI parameter
      * @return an instance of javax.xml.bind.JAXBElement<Model.SearchVideoWithYearCreationDateResponse>
      */
-    @POST
-    @Produces("application/xml")
-    @Consumes("application/xml")
-    @Path("searchvideowithyearcreationdate/")
-    public JAXBElement<SearchVideoWithYearCreationDateResponse> postSearchVideoWithYearCreationDate(JAXBElement<Date> date) {
-        try {
-            // Call Web Service Operation
-            if (port != null) {
-                java.util.List<Model.Video> result = port.searchVideoWithYearCreationDate(date.getValue());
-
-                class SearchVideoWithYearCreationDateResponse_1 extends Model.SearchVideoWithYearCreationDateResponse {
-
-                    SearchVideoWithYearCreationDateResponse_1(java.util.List<Model.Video> _return) {
-                        this._return = _return;
-                    }
-                }
-                Model.SearchVideoWithYearCreationDateResponse response = new SearchVideoWithYearCreationDateResponse_1(result);
-                return new Model.ObjectFactory().createSearchVideoWithYearCreationDateResponse(response);
-            }
-        } catch (Exception ex) {
-            // TODO handle custom exceptions here
-        }
-        return null;
-    }
-
-    /**
-     * Invokes the SOAP method hello
-     * @param name resource URI parameter
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Produces("text/plain")
-    @Consumes("text/plain")
-    @Path("hello/")
-    public String getHello(@QueryParam("name") String name) {
-        try {
-            // Call Web Service Operation
-            if (port != null) {
-                java.lang.String result = port.hello(name);
-                return result;
-            }
-        } catch (Exception ex) {
-            // TODO handle custom exceptions here
-        }
-        return null;
-    }
-
+    
     /**
      * Invokes the SOAP method searchVideoWithAuthor
      * @param author resource URI parameter
@@ -123,36 +74,7 @@ public class SearchServicePort {
         return null;
     }
 
-    /**
-     * Invokes the SOAP method searchWithVideoName
-     * @param name resource URI parameter
-     * @return an instance of javax.xml.bind.JAXBElement<Model.SearchWithVideoNameResponse>
-     */
-    @GET
-    @Produces("application/xml")
-    @Consumes("text/plain")
-    @Path("searchwithvideoname/")
-    public JAXBElement<SearchWithVideoNameResponse> getSearchWithVideoName(@QueryParam("name") String name) {
-        try {
-            // Call Web Service Operation
-            if (port != null) {
-                java.util.List<Model.Video> result = port.searchWithVideoName(name);
-
-                class SearchWithVideoNameResponse_1 extends Model.SearchWithVideoNameResponse {
-
-                    SearchWithVideoNameResponse_1(java.util.List<Model.Video> _return) {
-                        this._return = _return;
-                    }
-                }
-                Model.SearchWithVideoNameResponse response = new SearchWithVideoNameResponse_1(result);
-                return new Model.ObjectFactory().createSearchWithVideoNameResponse(response);
-            }
-        } catch (Exception ex) {
-            // TODO handle custom exceptions here
-        }
-        return null;
-    }
-
+    
     /**
      *
      */
