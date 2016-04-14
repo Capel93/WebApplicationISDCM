@@ -51,7 +51,6 @@ public class servletSearch extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -84,8 +83,20 @@ public class servletSearch extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        throws ServletException, IOException {
+        String searchType = request.getParameter("searchType");
+        if(searchType == "videoName"){
+            String name = request.getParameter("videoName");
+            searchWithVideoTitle(name);
+        }
+        else if(searchType == "author"){
+            String author = request.getParameter("author");
+            searchVideoWithAuthor(author);
+        }
+        else if(searchType == "creationYear"){
+            String creationYear = request.getParameter("creationYear");
+            searchVideoWithCreationYear(Integer.getInteger(creationYear));
+        }    
     }
 
     /**
