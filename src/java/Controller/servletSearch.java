@@ -6,8 +6,11 @@
 package Controller;
 
 import Client.SearchVideoService_Service;
+import Client.Video;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -84,19 +87,27 @@ public class servletSearch extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+        List<Video> videos = new ArrayList<Video>();
         String searchType = request.getParameter("searchType");
-        if(searchType == "videoName"){
+        if(searchType.equals("videoName")){
             String name = request.getParameter("videoName");
-            searchWithVideoTitle(name);
+            videos = searchWithVideoTitle(name);
         }
-        else if(searchType == "author"){
+        if(searchType.equals("author")){
             String author = request.getParameter("author");
-            searchVideoWithAuthor(author);
+            videos = searchVideoWithAuthor(author);
         }
-        else if(searchType == "creationYear"){
+        if(searchType.equals("creationYear")){
             String creationYear = request.getParameter("creationYear");
-            searchVideoWithCreationYear(Integer.getInteger(creationYear));
-        }    
+            videos = searchVideoWithCreationYear(Integer.parseInt(creationYear));
+            
+        }
+        
+        if (videos.isEmpty()) request.setAttribute("listvideos",null);
+        else request.setAttribute("listvideos",changeClass(videos));
+        request.setAttribute("searchType",searchType);
+        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?mylink=videos");
+        reqDispatcher.forward(request,response);
     }
 
     /**
@@ -129,7 +140,15 @@ public class servletSearch extends HttpServlet {
         Client.SearchVideoService port = service.getSearchVideoServicePort();
         return port.searchWithVideoTitle(title);
     }
-    
+    public ArrayList<Model.Video> changeClass(List<Client.Video> cVideos){
+        ArrayList<Model.Video> videos = new ArrayList<Model.Video>();
+        for (Client.Video v : cVideos) {
+            Model.Video mVideo = new Model.Video(v.getId(), v.getTitle(), v.getAuthor(),v.getCreationDate(), v.getDuration()
+                    , v.getViews(), v.getDescription(), v.getFormat(), v.getUrl(), v.getUploader());
+            videos.add(mVideo);
+        }
+        return videos;
+    }
     
 
 }

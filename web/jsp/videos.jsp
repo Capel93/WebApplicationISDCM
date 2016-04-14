@@ -17,7 +17,11 @@
         
     </head>
     <body>
-        <h2>List of Videos in the Database</h2>
+        <% if(request.getAttribute("searchType")!=null){%>
+            <h2>List of Videos in the Database filtered by <%=request.getAttribute("searchType")%> </h2>
+        <%}else{%>
+        <h2>List of Videos in the Database </h2>
+        <%}%>
         <table class="table table-hover" id="videos_table" onload="loadTable()">
             <tr>
                 <th>#</th>
@@ -35,8 +39,9 @@
             <%
             if(request.getAttribute("listvideos")!=null)
             { 
-                
+              
               ArrayList<Video> listvideos = (ArrayList<Video>)request.getAttribute("listvideos");
+              
               if(listvideos.size()==0){%>
                 <tr>
                     <td>-</td>

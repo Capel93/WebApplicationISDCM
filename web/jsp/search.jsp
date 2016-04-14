@@ -18,7 +18,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Search by Video Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="videoName" id="name" placeholder="Enter Video Name">
+                    <input type="text" class="form-control" name="videoName" id="videoName" placeholder="Enter Video Name">
                 </div>
             </div>
             <div class="form-group">        
@@ -33,7 +33,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Search by Author Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="author" id="name" placeholder="Enter author Name">
+                    <input type="text" class="form-control" name="author" id="author" placeholder="Enter author Name">
                 </div>
             </div>
             <div class="form-group">        
@@ -48,7 +48,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Search by Creation Year</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="creationYear" id="name" placeholder="Enter Creation Year">
+                    <input type="number" class="form-control" name="creationYear" id="creationYear" placeholder="Enter Creation Year">
                 </div>
             </div>
             <div class="form-group">        

@@ -10,23 +10,6 @@
                 JAX-WS WSGEN SECTION
                 ===================
             -->
-    <target name="wsgen-init" depends="init, -do-compile">
-        <mkdir dir="${build.generated.sources.dir}/jax-ws/resources/"/>
-        <mkdir dir="${build.classes.dir}"/>
-        <mkdir dir="${build.classes.dir}/META-INF"/>
-        <property name="j2ee.platform.wsgen.classpath" value="${libs.jaxws21.classpath}"/>
-        <taskdef name="wsgen" classname="com.sun.tools.ws.ant.WsGen">
-            <classpath path="${java.home}/../lib/tools.jar:${build.classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
-        </taskdef>
-    </target>
-    <target name="wsgen-SearchService" depends="wsgen-init">
-        <copy todir="${build.classes.dir}/META-INF">
-            <fileset dir="${webinf.dir}" includes="wsit-Services.SearchService.xml"/>
-        </copy>
-        <wsgen sourcedestdir="${build.generated.sources.dir}/jax-ws" resourcedestdir="${build.generated.sources.dir}/jax-ws/resources/" destdir="${build.generated.sources.dir}/jax-ws" verbose="true" keep="true" genwsdl="true" sei="Services.SearchService" xendorsed="true">
-            <classpath path="${java.home}/../lib/tools.jar:${build.classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
-        </wsgen>
-    </target>
     <!--
                 ===================
                 JAX-WS WSIMPORT SECTION
@@ -42,22 +25,6 @@
         <condition property="conf-dir" value="${conf.dir}/" else="">
             <isset property="conf.dir"/>
         </condition>
-    </target>
-    <target name="wsimport-client-SearchService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/SearchService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/SearchService" destdir="${build.generated.dir}/jax-wsCache/SearchService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/SearchService/wsdl/localhost_8080/WebApplicationISDCM/SearchService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/WebApplicationISDCM/SearchService?wsdl" xnocompile="true" xendorsed="true" package="Model">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/SearchService/wsdl/localhost_8080/WebApplicationISDCM/SearchService.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/SearchService"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/SearchService">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-SearchService" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/Model"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/SearchService"/>
     </target>
     <target name="wsimport-client-SearchVideoService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/SearchVideoService"/>
@@ -75,5 +42,5 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/Client"/>
         <delete dir="${build.generated.dir}/jax-wsCache/SearchVideoService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-SearchService, wsimport-client-SearchVideoService"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-SearchVideoService"/>
 </project>
