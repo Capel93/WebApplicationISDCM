@@ -14,7 +14,7 @@
     <body>
          <br><br><br>
         <form class="form-horizontal" role="form" action="servletSearch" method="post">
-            <input type="hidden" name="searchType" value="VideoName" /> 
+            <input type="hidden" name="searchType" value="videoName" /> 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Search by Video Name</label>
                 <div class="col-sm-10">
