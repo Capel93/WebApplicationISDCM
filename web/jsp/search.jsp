@@ -11,51 +11,72 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-         <br><br><br>
-        <form class="form-horizontal" role="form" action="servletSearch" method="post">
-            <input type="hidden" name="searchType" value="videoName" /> 
+    <body onload="init()">
+        
+        
+        
+                 
+        <form class="navbar-form navbar-left" role="search" style="inline" onSubmit="sendForm()">
+            
+            
+            <input type="hidden" id="buttonvalue"/>
             <div class="form-group">
-                <label class="control-label col-sm-2" for="name">Search by Video Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="videoName" id="videoName" placeholder="Enter Video Name">
+                
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary active" onClick="selectButtonTitle()">
+                        <input type="radio" name="options" id="title" value="title" autocomplete="off"  checked> Title
+                    </label>
+                    <label class="btn btn-primary" onClick="selectButtonAuthor()">
+                        <input type="radio" name="options" id="author" value="author" autocomplete="off"> Author
+                    </label>
+                    <label class="btn btn-primary" onClick="selectButtonYear()">
+                        <input type="radio" name="options" id="year"  value="year" autocomplete="off" > Year
+                    </label>
                 </div>
+                
+                <input type="text" class="form-control" placeholder="Search" id="searchField" size="100">
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
             </div>
-            <div class="form-group">        
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </div>
-            </div>
-        </form>     
-        <br><br><br>
-        <form class="form-horizontal" role="form" action="servletSearch" method="post">
-            <input type="hidden" name="searchType" value="author" /> 
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="name">Search by Author Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="author" id="author" placeholder="Enter author Name">
-                </div>
-            </div>
-            <div class="form-group">        
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </div>
-            </div>
-        </form>     
-        <br><br><br>
-        <form class="form-horizontal" role="form" action="servletSearch" method="post">
-            <input type="hidden" name="searchType" value="creationYear" /> 
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="name">Search by Creation Year</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" name="creationYear" id="creationYear" placeholder="Enter Creation Year">
-                </div>
-            </div>
-            <div class="form-group">        
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </div>
-            </div>
-        </form>     
+        </form>
     </body>
 </html>
+
+
+<script>
+    var searchType;
+    function selectButtonTitle(){
+        searchType="title";
+    }
+    function selectButtonAuthor(){
+       searchType="author";
+    }
+    function selectButtonYear(){
+        searchType="year";
+    }
+    
+    function sendForm(){
+        
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "servletSearch");
+        
+        var searchAction = document.createElement("input");
+        searchAction.value=searchType;
+        searchAction.name="searchType";
+                    
+        var searchField = document.getElementById("searchField");
+       
+        form.appendChild(searchField);
+        form.appendChild(searchAction);
+                    
+        document.body.appendChild(form);
+        
+        alert(searchAction.value);
+        form.submit();
+        
+    }
+    
+    function init(){
+        searchType = "title";
+    }
+</script>

@@ -28,33 +28,7 @@ public class servletSearch extends HttpServlet {
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/WebServiceSOAP/SearchVideoService.wsdl")
     private SearchVideoService_Service service;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet servletSearch</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet servletSearch at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    /**
+        /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -89,16 +63,16 @@ public class servletSearch extends HttpServlet {
         throws ServletException, IOException {
         List<Video> videos = new ArrayList<Video>();
         String searchType = request.getParameter("searchType");
-        if(searchType.equals("videoName")){
-            String name = request.getParameter("videoName");
-            videos = searchWithVideoTitle(name);
+        if(searchType.equals("title")){
+            String title = request.getParameter("title");
+            videos = searchWithVideoTitle(title);
         }
         if(searchType.equals("author")){
             String author = request.getParameter("author");
             videos = searchVideoWithAuthor(author);
         }
-        if(searchType.equals("creationYear")){
-            String creationYear = request.getParameter("creationYear");
+        if(searchType.equals("year")){
+            String creationYear = request.getParameter("year");
             videos = searchVideoWithCreationYear(Integer.parseInt(creationYear));
             
         }
