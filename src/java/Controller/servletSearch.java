@@ -62,17 +62,18 @@ public class servletSearch extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         List<Video> videos = new ArrayList<Video>();
-        String searchType = request.getParameter("searchType");
+        String searchType = request.getParameter("options");
+     
         if(searchType.equals("title")){
-            String title = request.getParameter("title");
+            String title = request.getParameter("searchField");
             videos = searchWithVideoTitle(title);
         }
         if(searchType.equals("author")){
-            String author = request.getParameter("author");
+            String author = request.getParameter("searchField");
             videos = searchVideoWithAuthor(author);
         }
         if(searchType.equals("year")){
-            String creationYear = request.getParameter("year");
+            String creationYear = request.getParameter("searchField");
             videos = searchVideoWithCreationYear(Integer.parseInt(creationYear));
             
         }
@@ -80,7 +81,7 @@ public class servletSearch extends HttpServlet {
         if (videos.isEmpty()) request.setAttribute("listvideos",null);
         else request.setAttribute("listvideos",changeClass(videos));
         request.setAttribute("searchType",searchType);
-        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?mylink=videos");
+        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?mylink=search");
         reqDispatcher.forward(request,response);
     }
 
