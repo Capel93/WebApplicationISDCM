@@ -41,6 +41,14 @@
         <servlet-name>servletSearch</servlet-name>
         <servlet-class>Controller.servletSearch</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servletStreamingVideos</servlet-name>
+        <servlet-class>Controller.servletStreamingVideos</servlet-class>
+        <init-param>
+            <param-name>id</param-name>
+            <param-value>int</param-value>
+        </init-param>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servletRegisterUser</servlet-name>
         <url-pattern>/servletRegisterUser</url-pattern>
@@ -68,6 +76,10 @@
     <servlet-mapping>
         <servlet-name>servletSearch</servlet-name>
         <url-pattern>/servletSearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletStreamingVideos</servlet-name>
+        <url-pattern>/servletStreamingVideos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

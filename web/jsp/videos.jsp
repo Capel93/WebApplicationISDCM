@@ -61,7 +61,7 @@
                     for(Video v: listvideos){
                     %>  
                         <tr>
-                            <td><%=v.getId()%></td>
+                            <td><a href="servletStreamingVideos?video=<%=v.getId()%>"><%=v.getId()%></td>
                             <td><%=v.getTitle()%></td>		
                             <td><%=v.getAuthor()%></td>
                             <td><%=v.getCreation_date()%></td>

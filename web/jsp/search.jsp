@@ -19,7 +19,7 @@
         
         <div class="container-fluid">
                  
-        <form class="navbar-form navbar-left" role="search" style="inline" method="post">
+        <form class="navbar-form navbar-left" role="search" style="inline" action="servletSearch" method="post">
             
             
             <input type="hidden" id="buttonvalue"/>

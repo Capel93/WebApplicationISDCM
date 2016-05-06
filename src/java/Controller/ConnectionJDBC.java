@@ -261,6 +261,63 @@ public class ConnectionJDBC {
         return videos;
     }
     
+    public static Video getVideoByID(int id){
+        ArrayList<Video> videos = null;
+        try {
+            Statement statement;
+            ResultSet rs;
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            rs = statement.executeQuery("SELECT * FROM videos WHERE id="+id+"");
+            videos = new ArrayList();
+            while(rs.next()){
+                Video v = new Video();
+                v.setId(rs.getInt("ID"));
+                v.setTitle(rs.getString("TITLE"));
+                v.setAuthor(rs.getString("AUTHOR"));
+                v.setCreation_date(rs.getString("CREATION_DATE"));
+                v.setDuration(rs.getString("DURATION"));
+                v.setViews(rs.getInt("VIEWS"));
+                v.setDescription(rs.getString("DESCRIPTION"));
+                v.setFormat(rs.getString("FORMAT"));
+                v.setUrl(rs.getString("URL"));
+                v.setUploader(rs.getString("UPLOADER"));
+                videos.add(v);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(videos.isEmpty()){
+            return null;
+        }else{
+            return videos.get(0);
+        }
+        
+    }
+    
+    public static int addView(int id){
+        
+        Video v = getVideoByID(id);
+        if (v!=null){
+            v.setViews(v.getViews()+1);
+            try {
+                Statement statement;
+                statement = connection.createStatement();
+                statement.setQueryTimeout(30);
+                return statement.executeUpdate("UPDATE videos SET views='"+v.getViews()+"' WHERE id='"+v.getId()+"';");
+            } catch (SQLException ex) {
+                Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+                return -1;
+            }
+        }else{
+            return -1;
+        }
+        
+        
+        
+    }
+    
     public static void disconnect(){
         try {
             if(connection!=null){
