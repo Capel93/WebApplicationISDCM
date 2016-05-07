@@ -116,6 +116,12 @@
                             <td><%=v.getUploader()%></td>
                             
                             <td>
+                                <button class="btn btn-xs btn-success" onclick="JavaScript:watch(<%=v.getId()%>)">
+                                <i class="glyphicon glyphicon-play"></i> Watch
+                                </button>
+                            </td>
+                            
+                            <td>
                                 <button class="btn btn-xs btn-danger" data-href="JavaScript:remove(<%=v.getId()%>)" data-toggle="modal" data-target="#confirm-delete">
                                 <i class="glyphicon glyphicon-trash"></i> Delete
                                 </button>
@@ -149,6 +155,19 @@
                 
                 form.appendChild(action);
                 form.appendChild(element);
+                document.body.appendChild(form);
+                form.submit();
+            }
+            
+            function watch(id){
+                var form = document.createElement("form");
+                form.setAttribute("method", "get");
+                form.setAttribute("action", "servletViewVideo");
+                var videoId = document.createElement("input");
+                videoId.value=id;
+                videoId.name="id";
+                
+                form.appendChild(videoId);
                 document.body.appendChild(form);
                 form.submit();
             }

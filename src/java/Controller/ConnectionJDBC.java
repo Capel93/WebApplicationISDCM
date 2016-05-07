@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.org.mozilla.javascript.internal.Token;
+//import sun.org.mozilla.javascript.internal.Token;
 /**
  *
  * @author JoanMarc
@@ -259,6 +259,33 @@ public class ConnectionJDBC {
             Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
         return videos;
+    }
+    
+    public static Video getVideoById(int id){
+        Video v = new Video();
+        try {
+            Statement statement;
+            ResultSet rs;
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            rs = statement.executeQuery("SELECT * FROM videos WHERE id="+id+"");
+            while(rs.next()){
+                v.setId(rs.getInt("ID"));
+                v.setTitle(rs.getString("TITLE"));
+                v.setAuthor(rs.getString("AUTHOR"));
+                v.setCreation_date(rs.getString("CREATION_DATE"));
+                v.setDuration(rs.getString("DURATION"));
+                v.setViews(rs.getInt("VIEWS"));
+                v.setDescription(rs.getString("DESCRIPTION"));
+                v.setFormat(rs.getString("FORMAT"));
+                v.setUrl(rs.getString("URL"));
+                v.setUploader(rs.getString("UPLOADER"));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return v;
     }
     
     public static void disconnect(){
