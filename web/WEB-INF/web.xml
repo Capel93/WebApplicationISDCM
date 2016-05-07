@@ -41,6 +41,10 @@
         <servlet-name>servletSearch</servlet-name>
         <servlet-class>Controller.servletSearch</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servletViewVideo</servlet-name>
+        <servlet-class>Controller.servletViewVideo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servletRegisterUser</servlet-name>
         <url-pattern>/servletRegisterUser</url-pattern>
@@ -68,6 +72,10 @@
     <servlet-mapping>
         <servlet-name>servletSearch</servlet-name>
         <url-pattern>/servletSearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletViewVideo</servlet-name>
+        <url-pattern>/servletViewVideo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
