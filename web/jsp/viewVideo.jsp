@@ -21,7 +21,7 @@
                 src="<%=v.getUrl()%>">
                 </iframe>
              <%} else if (request.getAttribute("location")== "local"){%>
-                <video width="1280" height="720" controls>
+                <video width="1280" height="720" id="video" controls>
                     <source src="<%=v.getUrl()%>" type="video/mp4">
                 </video>
              <%}%>
@@ -34,7 +34,15 @@
             <%=v.getViews()%>
          
          <%}%>
-         
+        <script>
+            
+            var video = document.getElementById("video")[0];
+            var first = true;
+            if(video.onplay()&&first){
+                
+            }
+             
+        </script>
        
            <!--videos/Triple.9.2016.720p.WEBRip.x264.AAC-ETRG.mp4" type="video/mp4-->
         
