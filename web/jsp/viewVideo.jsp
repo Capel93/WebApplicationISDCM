@@ -13,27 +13,28 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <% if(request.getAttribute("video")!=null){%>
-            <%Video v = (Video)request.getAttribute("video");%>
-            
-            <%if (request.getAttribute("location")== "youtube"){%>
-                <iframe width="1280" height="720"
-                src="<%=v.getUrl()%>">
+        <% if (request.getAttribute("video") != null) {%>
+            <%Video v = (Video) request.getAttribute("video");%>
+
+            <%if (request.getAttribute("location") == "youtube") {%>
+                <iframe width="854" height="480"
+                        src="<%=v.getUrl()%>?autoplay=1" allowfullscreen> 
                 </iframe>
-             <%} else if (request.getAttribute("location")== "local"){%>
-                <video width="1280" height="720" id="video" controls>
+            <%} else if (request.getAttribute("location") == "local") {%>
+                <video width="854" height="480" id="video" controls autoplay>
                     <source src="<%=v.getUrl()%>" type="video/mp4">
                 </video>
-             <%}%>
-             
-             <%=v.getTitle()%> 
-             <%=v.getAuthor()%> 
-            
-            <%=v.getUploader()%>
-            
-            <%=v.getViews()%>
+            <%}%>
+
+
+            <h1><%=v.getTitle()%></h1>
+            <h4><%=v.getViews()%> views</h4>
+            <h4>Uploaded by: <%=v.getUploader()%></h4>
+            <h4>Created by: <%=v.getAuthor()%> - <%=v.getCreation_date()%> </h4>
+            <h4><%=v.getDescription()%></h4> 
          
-         <%}%>
+        <%}%>
+         
         <script>
             
             var video = document.getElementById("video")[0];
