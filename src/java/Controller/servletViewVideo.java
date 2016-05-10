@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Video;
+import RestClient.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -35,14 +36,26 @@ public class servletViewVideo extends HttpServlet {
             response.sendRedirect("index.jsp?mylink=login");
         }else{
             
-           /*
-            Manejar les views contra la api rest
+            /*
+            REST
+            */
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            int views = GetViews.ViewsGet(id);
+            views += 1;
+           
+            PostViews.ViewsPost(id);
+           
+            /*
+             FI REST
             */
            
            
             ConnectionJDBC.connect();
-            Video video = ConnectionJDBC.getVideoById(Integer.parseInt(request.getParameter("id")));
+            Video video = ConnectionJDBC.getVideoById(id);
             ConnectionJDBC.disconnect();
+            
+            video.setViews(views);
             
             String url = video.getUrl();
             int indexOf = url.indexOf("youtube.com/watch?v="); 
